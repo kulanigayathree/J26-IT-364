@@ -1,0 +1,61 @@
+# Marine AI Platform — Combined requirements (C1–C4)
+# Python 3.10 or 3.11 recommended
+
+# ---------- Core data handling ----------
+numpy>=1.24
+pandas>=2.0
+pyyaml>=6.0
+python-dotenv>=1.0
+requests>=2.31
+tqdm>=4.66
+
+# ---------- Deep learning ----------
+torch>=2.1
+torchvision>=0.16
+segmentation-models-pytorch>=0.3.3
+albumentations>=1.3
+torchmetrics>=1.2
+scikit-learn>=1.3
+
+# ---------- Geospatial ----------
+geopandas>=0.14
+shapely>=2.0
+pyproj>=3.6
+rasterio>=1.3
+rioxarray>=0.15
+movingpandas>=0.17
+
+# ---------- Database ----------
+sqlalchemy>=2.0
+geoalchemy2>=0.14
+psycopg2-binary>=2.9
+
+# ---------- Ocean & climate data ----------
+xarray>=2023.1
+netCDF4>=1.6
+dask>=2023.1
+copernicusmarine>=1.0
+ephem>=4.1
+
+# ---------- Remote sensing & SAR ----------
+earthengine-api>=0.1.380
+pyroSAR>=0.23
+opencv-python>=4.8
+scikit-image>=0.22
+
+# ---------- AIS ----------
+gfw-api-python-client>=1.0
+
+# ---------- Routing & probabilistic evaluation ----------
+networkx>=3.2
+properscoring>=0.1
+
+# ---------- Visualisation ----------
+matplotlib>=3.8
+seaborn>=0.13
+cartopy>=0.22
+folium>=0.15
+
+# ---------- Development ----------
+jupyter>=1.0
+pytest>=7.4
