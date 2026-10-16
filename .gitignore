@@ -1,2 +1,10 @@
 data/
 docs/
+data/raw/*
+!data/raw/.gitkeep
+
+data/raw/*.csv
+data/processed/*.parquet
+models/*.pkl
+__pycache__/
+.streamlit/
