@@ -1,0 +1,233 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "C1-A002",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.8711, 9.2846]
+      },
+      "properties": {
+        "id": "C1-A002",
+        "mmsi": "419001877",
+        "vessel_name": "Sri Murugan",
+        "anomaly_type": "ais_gap",
+        "score": 0.78,
+        "severity": "high",
+        "detected_at": "2026-10-17T23:33:03.592Z",
+        "source": "AIS",
+        "description": "AIS silent for 5 h 40 min close to the maritime boundary."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A007",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.2729, 5.588]
+      },
+      "properties": {
+        "id": "C1-A007",
+        "mmsi": "636019822",
+        "vessel_name": "Andaman Spirit",
+        "anomaly_type": "speed_change",
+        "score": 0.55,
+        "severity": "medium",
+        "detected_at": "2026-10-17T22:10:53.220Z",
+        "source": "AIS",
+        "description": "Dropped from 12.4 kn to 2.1 kn in 20 min, then resumed."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.7354, 9.3624]
+      },
+      "properties": {
+        "id": "C1-A001",
+        "mmsi": "419001877",
+        "vessel_name": "Sri Murugan",
+        "anomaly_type": "route_deviation",
+        "score": 0.91,
+        "severity": "high",
+        "detected_at": "2026-10-17T20:54:29.049Z",
+        "source": "AIS",
+        "description": "Crossed the India–Sri Lanka maritime boundary and stayed 6.2 km inside Sri Lankan waters for 4 h."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A009",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.1167, 6.0794]
+      },
+      "properties": {
+        "id": "C1-A009",
+        "mmsi": "477330615",
+        "vessel_name": "Golden Horizon",
+        "anomaly_type": "route_deviation",
+        "score": 0.41,
+        "severity": "low",
+        "detected_at": "2026-10-17T19:46:29.381Z",
+        "source": "AIS",
+        "description": "Left the usual Colombo–Maldives route by 18 km."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A004",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [82.3198, 6.9856]
+      },
+      "properties": {
+        "id": "C1-A004",
+        "mmsi": "412440190",
+        "vessel_name": "Hai Feng 66",
+        "anomaly_type": "dark_vessel",
+        "score": 0.88,
+        "severity": "high",
+        "detected_at": "2026-10-17T19:06:09.881Z",
+        "source": "AIS+SAR",
+        "description": "SAR detection matches the vessel’s last AIS position after it switched AIS off."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A006",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.852, 5.6069]
+      },
+      "properties": {
+        "id": "C1-A006",
+        "mmsi": "636019822",
+        "vessel_name": "Andaman Spirit",
+        "anomaly_type": "loitering",
+        "score": 0.73,
+        "severity": "high",
+        "detected_at": "2026-10-17T18:15:32.398Z",
+        "source": "AIS",
+        "description": "Speed under 1 kn for 3 h 10 min outside the traffic separation scheme off Dondra Head."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A003",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [81.9546, 9.4054]
+      },
+      "properties": {
+        "id": "C1-A003",
+        "mmsi": "unknown",
+        "vessel_name": "Unidentified (SAR only)",
+        "anomaly_type": "dark_vessel",
+        "score": 0.84,
+        "severity": "high",
+        "detected_at": "2026-10-17T16:13:31.831Z",
+        "source": "SAR",
+        "description": "Sentinel-1 detected a 30–40 m vessel with no matching AIS signal within 5 km and 30 min."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A010",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [82.1134, 8.883]
+      },
+      "properties": {
+        "id": "C1-A010",
+        "mmsi": "417000874",
+        "vessel_name": "Nimal Putha",
+        "anomaly_type": "speed_change",
+        "score": 0.38,
+        "severity": "low",
+        "detected_at": "2026-10-17T15:02:45.067Z",
+        "source": "AIS",
+        "description": "Repeated slow–fast pattern. Consistent with fishing."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A005",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [82.4773, 6.7238]
+      },
+      "properties": {
+        "id": "C1-A005",
+        "mmsi": "412440190",
+        "vessel_name": "Hai Feng 66",
+        "anomaly_type": "ais_gap",
+        "score": 0.69,
+        "severity": "medium",
+        "detected_at": "2026-10-17T13:39:13.893Z",
+        "source": "AIS",
+        "description": "AIS gap of 7 h 15 min inside the EEZ."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A011",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.3228, 7.1737]
+      },
+      "properties": {
+        "id": "C1-A011",
+        "mmsi": "417000231",
+        "vessel_name": "Sayuri 3",
+        "anomaly_type": "loitering",
+        "score": 0.32,
+        "severity": "low",
+        "detected_at": "2026-10-17T11:29:01.842Z",
+        "source": "AIS",
+        "description": "Slow circling pattern typical of fishing. Flagged for review only."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A008",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.9217, 4.9138]
+      },
+      "properties": {
+        "id": "C1-A008",
+        "mmsi": "417000562",
+        "vessel_name": "Ruwan Kumari",
+        "anomaly_type": "ais_gap",
+        "score": 0.62,
+        "severity": "medium",
+        "detected_at": "2026-10-17T08:01:35.240Z",
+        "source": "AIS",
+        "description": "AIS gap of 9 h at 4.9° N. Likely beyond coastal AIS coverage; check satellite AIS."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "C1-A012",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [81.1762, 5.7067]
+      },
+      "properties": {
+        "id": "C1-A012",
+        "mmsi": "563012440",
+        "vessel_name": "Pacific Meridian",
+        "anomaly_type": "speed_change",
+        "score": 0.29,
+        "severity": "low",
+        "detected_at": "2026-10-17T04:08:35.699Z",
+        "source": "AIS",
+        "description": "Short speed reduction near the shipping lane."
+      }
+    }
+  ]
+}

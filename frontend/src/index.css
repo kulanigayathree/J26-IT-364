@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-base text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans text-navy;
+  }
+
+  a {
+    @apply text-sea underline-offset-2;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.sea');
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Room for the iPhone home indicator under the bottom tab bar. */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Leaflet: match the app frame. */
+.leaflet-container {
+  background: theme('colors.paper-2');
+  font-family: theme('fontFamily.sans');
+  font-size: theme('fontSize.xs[0]');
+}
+
+.leaflet-control-layers,
+.leaflet-bar {
+  border: 1px solid theme('colors.line') !important;
+  border-radius: theme('borderRadius.DEFAULT') !important;
+  box-shadow: theme('boxShadow.DEFAULT') !important;
+}
+
+.leaflet-control-layers-expanded {
+  padding: theme('spacing.2') theme('spacing.3');
+  color: theme('colors.ink');
+  font-size: theme('fontSize.sm[0]');
+}
+
+.leaflet-tooltip {
+  border: 1px solid theme('colors.line');
+  border-radius: theme('borderRadius.DEFAULT');
+  box-shadow: theme('boxShadow.DEFAULT');
+  color: theme('colors.ink');
+  font-family: theme('fontFamily.sans');
+  font-size: theme('fontSize.sm[0]');
+}
+
+.leaflet-control-scale-line {
+  border-color: theme('colors.ink');
+  color: theme('colors.ink');
+  background: theme('colors.paper / 85%');
+}

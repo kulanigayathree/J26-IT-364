@@ -74,6 +74,26 @@ pip install -r requirements.txt
 docker-compose up -d
 ```
 
+## Run the app
+
+The web app (React + Vite PWA) lives in `frontend/`, the API (FastAPI) in `integration/api/`.
+
+```bash
+# API: http://localhost:8000/docs
+cd integration/api
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+# Frontend (Node 20+, in a second terminal): http://localhost:5173
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend works without the API too: in dev it falls back to sample data in each component's
+`mock/` folder. Before opening a PR run `npm run lint && npm run typecheck && npm run build` in
+`frontend/`. Building a component page? Read [frontend/CONTRIBUTING.md](frontend/CONTRIBUTING.md).
+
 ## Working on the Project
 
 - Put code shared by more than one component in `shared/`, not inside a component's folder.

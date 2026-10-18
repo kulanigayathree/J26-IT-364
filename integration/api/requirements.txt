@@ -1,0 +1,10 @@
+# Ocean AI API (integration/api). Python 3.10+.
+# Install: pip install -r integration/api/requirements.txt
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30
+pydantic>=2.7,<3
+
+# Later, for PostGIS (already in the root requirements.txt):
+# sqlalchemy>=2.0
+# geoalchemy2>=0.14
+# psycopg2-binary>=2.9

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "negombo",
+    "name": "Negombo",
+    "district": "Gampaha",
+    "lon": 79.835,
+    "lat": 7.21
+  },
+  {
+    "id": "colombo",
+    "name": "Colombo (Mutwal)",
+    "district": "Colombo",
+    "lon": 79.86,
+    "lat": 6.96
+  },
+  {
+    "id": "beruwala",
+    "name": "Beruwala",
+    "district": "Kalutara",
+    "lon": 79.983,
+    "lat": 6.479
+  },
+  {
+    "id": "galle",
+    "name": "Galle",
+    "district": "Galle",
+    "lon": 80.22,
+    "lat": 6.03
+  },
+  {
+    "id": "mirissa",
+    "name": "Mirissa",
+    "district": "Matara",
+    "lon": 80.457,
+    "lat": 5.946
+  },
+  {
+    "id": "tangalle",
+    "name": "Tangalle",
+    "district": "Hambantota",
+    "lon": 80.8,
+    "lat": 6.02
+  },
+  {
+    "id": "batticaloa",
+    "name": "Batticaloa",
+    "district": "Batticaloa",
+    "lon": 81.7,
+    "lat": 7.71
+  },
+  {
+    "id": "trincomalee",
+    "name": "Trincomalee",
+    "district": "Trincomalee",
+    "lon": 81.23,
+    "lat": 8.57
+  },
+  {
+    "id": "kalpitiya",
+    "name": "Kalpitiya",
+    "district": "Puttalam",
+    "lon": 79.76,
+    "lat": 8.23
+  }
+]

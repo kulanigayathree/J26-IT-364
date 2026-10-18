@@ -1,0 +1,1731 @@
+{
+  "bar-reef": {
+    "id": "bar-reef",
+    "name": "Bar Reef Marine Sanctuary",
+    "region": "Puttalam",
+    "latest_month": "2026-09",
+    "coral_cover_pct": 30.5,
+    "algae_cover_pct": 28,
+    "sand_rubble_pct": 41.5,
+    "change_12m_pct": -3.1,
+    "status": "watch",
+    "max_dhw_12m": 6.7,
+    "lon": 79.72,
+    "lat": 8.37,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 34.6,
+        "algae_pct": 27.2,
+        "sand_rubble_pct": 38.2,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 33.1,
+        "algae_pct": 29.4,
+        "sand_rubble_pct": 37.4,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 34.1,
+        "algae_pct": 27.2,
+        "sand_rubble_pct": 38.7,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 33.4,
+        "algae_pct": 28,
+        "sand_rubble_pct": 38.6,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 33.1,
+        "algae_pct": 29.6,
+        "sand_rubble_pct": 37.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 33.1,
+        "algae_pct": 28.8,
+        "sand_rubble_pct": 38.1,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 30.2,
+        "algae_pct": 30.6,
+        "sand_rubble_pct": 39.1,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 29.9,
+        "algae_pct": 31.9,
+        "sand_rubble_pct": 38.1,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 29.4,
+        "algae_pct": 29.9,
+        "sand_rubble_pct": 40.6,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 30.3,
+        "algae_pct": 30.3,
+        "sand_rubble_pct": 39.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": 32.9,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 38.8,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 33.6,
+        "algae_pct": 28.4,
+        "sand_rubble_pct": 38.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 31.8,
+        "algae_pct": 28.2,
+        "sand_rubble_pct": 40,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 32.2,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 38.5,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 32.4,
+        "algae_pct": 29,
+        "sand_rubble_pct": 38.5,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": 33,
+        "algae_pct": 28.9,
+        "sand_rubble_pct": 38.1,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 31.1,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 39.6,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 30.9,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 39.8,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 25.8,
+        "algae_pct": 34.3,
+        "sand_rubble_pct": 39.9,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 27.1,
+        "algae_pct": 34.6,
+        "sand_rubble_pct": 38.3,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": 30.5,
+        "algae_pct": 28,
+        "sand_rubble_pct": 41.5,
+        "cloud_free_obs": 2
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-03",
+        "dhw": 1.2,
+        "dhw_previous_year": 0.7
+      },
+      {
+        "month": "2026-04",
+        "dhw": 4.4,
+        "dhw_previous_year": 2.7
+      },
+      {
+        "month": "2026-05",
+        "dhw": 6.7,
+        "dhw_previous_year": 3.9
+      },
+      {
+        "month": "2026-06",
+        "dhw": 4.3,
+        "dhw_previous_year": 2.6
+      },
+      {
+        "month": "2026-07",
+        "dhw": 1.1,
+        "dhw_previous_year": 0.6
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.5,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.2,
+        "dhw_previous_year": 0
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "hikkaduwa": {
+    "id": "hikkaduwa",
+    "name": "Hikkaduwa National Park",
+    "region": "Galle",
+    "latest_month": "2026-04",
+    "coral_cover_pct": 10.4,
+    "algae_cover_pct": 34.3,
+    "sand_rubble_pct": 55.3,
+    "change_12m_pct": -5.5,
+    "status": "degraded",
+    "max_dhw_12m": 8,
+    "lon": 80.093,
+    "lat": 6.139,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 18.3,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 52.5,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 18.1,
+        "algae_pct": 27.7,
+        "sand_rubble_pct": 54.2,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 18.4,
+        "algae_pct": 27.8,
+        "sand_rubble_pct": 53.8,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 19.3,
+        "algae_pct": 27.7,
+        "sand_rubble_pct": 53.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 18,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 52.9,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 18.3,
+        "algae_pct": 29.8,
+        "sand_rubble_pct": 51.9,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 15.9,
+        "algae_pct": 31.2,
+        "sand_rubble_pct": 52.9,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 14.5,
+        "algae_pct": 30.2,
+        "sand_rubble_pct": 55.3,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 15.7,
+        "algae_pct": 29.9,
+        "sand_rubble_pct": 54.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": 16.5,
+        "algae_pct": 28.7,
+        "sand_rubble_pct": 54.8,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 15.5,
+        "algae_pct": 29.5,
+        "sand_rubble_pct": 55,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 14.7,
+        "algae_pct": 30.2,
+        "sand_rubble_pct": 55.1,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 16.2,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 54.4,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 14.1,
+        "algae_pct": 30.7,
+        "sand_rubble_pct": 55.2,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": 14.6,
+        "algae_pct": 30.9,
+        "sand_rubble_pct": 54.5,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 14.4,
+        "algae_pct": 31.6,
+        "sand_rubble_pct": 54,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 13.1,
+        "algae_pct": 31.2,
+        "sand_rubble_pct": 55.8,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 10.4,
+        "algae_pct": 34.3,
+        "sand_rubble_pct": 55.3,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-03",
+        "dhw": 1.5,
+        "dhw_previous_year": 0.7
+      },
+      {
+        "month": "2026-04",
+        "dhw": 5.3,
+        "dhw_previous_year": 3
+      },
+      {
+        "month": "2026-05",
+        "dhw": 8,
+        "dhw_previous_year": 4.5
+      },
+      {
+        "month": "2026-06",
+        "dhw": 5.3,
+        "dhw_previous_year": 2.7
+      },
+      {
+        "month": "2026-07",
+        "dhw": 1.3,
+        "dhw_previous_year": 1.1
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.3
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "unawatuna": {
+    "id": "unawatuna",
+    "name": "Unawatuna Reef",
+    "region": "Galle",
+    "latest_month": "2026-07",
+    "coral_cover_pct": 21.2,
+    "algae_cover_pct": 32.3,
+    "sand_rubble_pct": 46.5,
+    "change_12m_pct": -3,
+    "status": "watch",
+    "max_dhw_12m": 5.3,
+    "lon": 80.249,
+    "lat": 6.006,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 26.7,
+        "algae_pct": 28.9,
+        "sand_rubble_pct": 44.4,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 26.2,
+        "algae_pct": 28.8,
+        "sand_rubble_pct": 45.1,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 27,
+        "algae_pct": 29.5,
+        "sand_rubble_pct": 43.5,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 26.2,
+        "algae_pct": 28.5,
+        "sand_rubble_pct": 45.3,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 26.1,
+        "algae_pct": 27.4,
+        "sand_rubble_pct": 46.4,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 25.1,
+        "algae_pct": 28.9,
+        "sand_rubble_pct": 46,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 23.4,
+        "algae_pct": 29,
+        "sand_rubble_pct": 47.6,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 24.9,
+        "algae_pct": 28.5,
+        "sand_rubble_pct": 46.6,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 24.2,
+        "algae_pct": 28.4,
+        "sand_rubble_pct": 47.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 24.9,
+        "algae_pct": 27.1,
+        "sand_rubble_pct": 48,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 26.1,
+        "algae_pct": 28.6,
+        "sand_rubble_pct": 45.3,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 24.1,
+        "algae_pct": 28.2,
+        "sand_rubble_pct": 47.7,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 24.3,
+        "algae_pct": 27.5,
+        "sand_rubble_pct": 48.3,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": 24.2,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 46.7,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 25.1,
+        "algae_pct": 27.8,
+        "sand_rubble_pct": 47.2,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 25.7,
+        "algae_pct": 29.7,
+        "sand_rubble_pct": 44.6,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 21.7,
+        "algae_pct": 31.3,
+        "sand_rubble_pct": 47,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": 20.4,
+        "algae_pct": 31.7,
+        "sand_rubble_pct": 47.9,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": 20.4,
+        "algae_pct": 31.2,
+        "sand_rubble_pct": 48.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 21.2,
+        "algae_pct": 32.3,
+        "sand_rubble_pct": 46.5,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0.2,
+        "dhw_previous_year": 0
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-03",
+        "dhw": 1,
+        "dhw_previous_year": 0.8
+      },
+      {
+        "month": "2026-04",
+        "dhw": 3.6,
+        "dhw_previous_year": 1.9
+      },
+      {
+        "month": "2026-05",
+        "dhw": 5.3,
+        "dhw_previous_year": 3
+      },
+      {
+        "month": "2026-06",
+        "dhw": 3.5,
+        "dhw_previous_year": 2.1
+      },
+      {
+        "month": "2026-07",
+        "dhw": 1,
+        "dhw_previous_year": 0.7
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.1
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "polhena": {
+    "id": "polhena",
+    "name": "Polhena Reef",
+    "region": "Matara",
+    "latest_month": "2026-09",
+    "coral_cover_pct": 17.3,
+    "algae_cover_pct": 30,
+    "sand_rubble_pct": 52.7,
+    "change_12m_pct": -2.2,
+    "status": "watch",
+    "max_dhw_12m": 7,
+    "lon": 80.52,
+    "lat": 5.935,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 22.6,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 49.2,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 21.4,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 49.4,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 21,
+        "algae_pct": 26.9,
+        "sand_rubble_pct": 52.1,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 20.7,
+        "algae_pct": 28.6,
+        "sand_rubble_pct": 50.6,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 20.1,
+        "algae_pct": 28.6,
+        "sand_rubble_pct": 51.3,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 20.6,
+        "algae_pct": 29.6,
+        "sand_rubble_pct": 49.7,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 17.5,
+        "algae_pct": 30.4,
+        "sand_rubble_pct": 52,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 18.4,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 52.4,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 19,
+        "algae_pct": 30,
+        "sand_rubble_pct": 51,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 17,
+        "algae_pct": 31.7,
+        "sand_rubble_pct": 51.3,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 19.5,
+        "algae_pct": 29,
+        "sand_rubble_pct": 51.6,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 19.4,
+        "algae_pct": 30.4,
+        "sand_rubble_pct": 50.2,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 19,
+        "algae_pct": 30.1,
+        "sand_rubble_pct": 51,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 18.2,
+        "algae_pct": 30.2,
+        "sand_rubble_pct": 51.6,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": 20,
+        "algae_pct": 28.5,
+        "sand_rubble_pct": 51.4,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 18.7,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 52.1,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 18.2,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 53.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 14.2,
+        "algae_pct": 32.6,
+        "sand_rubble_pct": 53.2,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 13.9,
+        "algae_pct": 34.2,
+        "sand_rubble_pct": 51.9,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": 17.5,
+        "algae_pct": 30.8,
+        "sand_rubble_pct": 51.7,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": 17.3,
+        "algae_pct": 30,
+        "sand_rubble_pct": 52.7,
+        "cloud_free_obs": 1
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-03",
+        "dhw": 1.2,
+        "dhw_previous_year": 0.9
+      },
+      {
+        "month": "2026-04",
+        "dhw": 4.7,
+        "dhw_previous_year": 2.5
+      },
+      {
+        "month": "2026-05",
+        "dhw": 7,
+        "dhw_previous_year": 3.8
+      },
+      {
+        "month": "2026-06",
+        "dhw": 4.5,
+        "dhw_previous_year": 2.6
+      },
+      {
+        "month": "2026-07",
+        "dhw": 1.5,
+        "dhw_previous_year": 0.7
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.2
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "great-basses": {
+    "id": "great-basses",
+    "name": "Great Basses Reef",
+    "region": "Hambantota (offshore)",
+    "latest_month": "2026-09",
+    "coral_cover_pct": 27.7,
+    "algae_cover_pct": 30.2,
+    "sand_rubble_pct": 42.2,
+    "change_12m_pct": -1.7,
+    "status": "watch",
+    "max_dhw_12m": 8.7,
+    "lon": 81.97,
+    "lat": 6.18,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 29.4,
+        "algae_pct": 29.4,
+        "sand_rubble_pct": 41.2,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 29.2,
+        "algae_pct": 28.8,
+        "sand_rubble_pct": 42,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 30.8,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 39.9,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 30.8,
+        "algae_pct": 27.1,
+        "sand_rubble_pct": 42.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 30.4,
+        "algae_pct": 29.5,
+        "sand_rubble_pct": 40,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 27.8,
+        "algae_pct": 31.3,
+        "sand_rubble_pct": 40.9,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 26.1,
+        "algae_pct": 31.3,
+        "sand_rubble_pct": 42.5,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 27.9,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 43,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 27.1,
+        "algae_pct": 29.4,
+        "sand_rubble_pct": 43.5,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": 29,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 41.9,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 29.4,
+        "algae_pct": 27.7,
+        "sand_rubble_pct": 42.9,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 29.7,
+        "algae_pct": 29.8,
+        "sand_rubble_pct": 40.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 29.4,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 41.4,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 29.3,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 41.6,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 27.7,
+        "algae_pct": 28,
+        "sand_rubble_pct": 44.3,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 29,
+        "algae_pct": 29.4,
+        "sand_rubble_pct": 41.6,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 24.3,
+        "algae_pct": 31.3,
+        "sand_rubble_pct": 44.3,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": 21.1,
+        "algae_pct": 34,
+        "sand_rubble_pct": 44.9,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": 20,
+        "algae_pct": 34.9,
+        "sand_rubble_pct": 45.1,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 23.8,
+        "algae_pct": 31.6,
+        "sand_rubble_pct": 44.6,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": 28.8,
+        "algae_pct": 28,
+        "sand_rubble_pct": 43.3,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": 27.7,
+        "algae_pct": 30.2,
+        "sand_rubble_pct": 42.2,
+        "cloud_free_obs": 4
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-03",
+        "dhw": 1.5,
+        "dhw_previous_year": 0.9
+      },
+      {
+        "month": "2026-04",
+        "dhw": 5.8,
+        "dhw_previous_year": 3.4
+      },
+      {
+        "month": "2026-05",
+        "dhw": 8.7,
+        "dhw_previous_year": 4.9
+      },
+      {
+        "month": "2026-06",
+        "dhw": 5.8,
+        "dhw_previous_year": 3.3
+      },
+      {
+        "month": "2026-07",
+        "dhw": 1.8,
+        "dhw_previous_year": 1.2
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.5,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.3
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "kayankerni": {
+    "id": "kayankerni",
+    "name": "Kayankerni Reef",
+    "region": "Batticaloa",
+    "latest_month": "2026-09",
+    "coral_cover_pct": 37.8,
+    "algae_cover_pct": 26.6,
+    "sand_rubble_pct": 35.6,
+    "change_12m_pct": 0.5,
+    "status": "healthy",
+    "max_dhw_12m": 3.7,
+    "lon": 81.55,
+    "lat": 7.98,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 37.5,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 34.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 37.5,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 33.4,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 37.4,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 33.6,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 37,
+        "algae_pct": 27.6,
+        "sand_rubble_pct": 35.4,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 38.4,
+        "algae_pct": 28.6,
+        "sand_rubble_pct": 33,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 35.4,
+        "algae_pct": 29.6,
+        "sand_rubble_pct": 35,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 36.9,
+        "algae_pct": 27.5,
+        "sand_rubble_pct": 35.6,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 37.6,
+        "algae_pct": 29.2,
+        "sand_rubble_pct": 33.2,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 35.5,
+        "algae_pct": 28,
+        "sand_rubble_pct": 36.4,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": 37.4,
+        "algae_pct": 27.8,
+        "sand_rubble_pct": 34.8,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 37.3,
+        "algae_pct": 27.1,
+        "sand_rubble_pct": 35.6,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": 37.5,
+        "algae_pct": 26.9,
+        "sand_rubble_pct": 35.7,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": 37.8,
+        "algae_pct": 26.8,
+        "sand_rubble_pct": 35.5,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": 36.4,
+        "algae_pct": 26.6,
+        "sand_rubble_pct": 37,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 37.8,
+        "algae_pct": 29.1,
+        "sand_rubble_pct": 33.1,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 38.3,
+        "algae_pct": 28.4,
+        "sand_rubble_pct": 33.3,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 37,
+        "algae_pct": 29,
+        "sand_rubble_pct": 34.1,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": 35.4,
+        "algae_pct": 30.1,
+        "sand_rubble_pct": 34.5,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": 35.4,
+        "algae_pct": 30,
+        "sand_rubble_pct": 34.6,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 35.6,
+        "algae_pct": 28.4,
+        "sand_rubble_pct": 36.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": 38.9,
+        "algae_pct": 29,
+        "sand_rubble_pct": 32.1,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": 37.8,
+        "algae_pct": 26.6,
+        "sand_rubble_pct": 35.6,
+        "cloud_free_obs": 5
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.1
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-03",
+        "dhw": 0.9,
+        "dhw_previous_year": 0.5
+      },
+      {
+        "month": "2026-04",
+        "dhw": 2.4,
+        "dhw_previous_year": 1.5
+      },
+      {
+        "month": "2026-05",
+        "dhw": 3.7,
+        "dhw_previous_year": 2
+      },
+      {
+        "month": "2026-06",
+        "dhw": 2.2,
+        "dhw_previous_year": 1.4
+      },
+      {
+        "month": "2026-07",
+        "dhw": 0.9,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.3
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  },
+  "pigeon-island": {
+    "id": "pigeon-island",
+    "name": "Pigeon Island National Park",
+    "region": "Trincomalee",
+    "latest_month": "2026-09",
+    "coral_cover_pct": 41.3,
+    "algae_cover_pct": 28.3,
+    "sand_rubble_pct": 30.4,
+    "change_12m_pct": -0.3,
+    "status": "healthy",
+    "max_dhw_12m": 3.9,
+    "lon": 81.21,
+    "lat": 8.722,
+    "series": [
+      {
+        "month": "2024-10",
+        "coral_pct": 42.1,
+        "algae_pct": 27.2,
+        "sand_rubble_pct": 30.7,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-11",
+        "coral_pct": 41.6,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 30,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2024-12",
+        "coral_pct": 41.5,
+        "algae_pct": 29.4,
+        "sand_rubble_pct": 29.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-01",
+        "coral_pct": 42.1,
+        "algae_pct": 28.6,
+        "sand_rubble_pct": 29.3,
+        "cloud_free_obs": 1
+      },
+      {
+        "month": "2025-02",
+        "coral_pct": 41.9,
+        "algae_pct": 27.8,
+        "sand_rubble_pct": 30.3,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-03",
+        "coral_pct": 41.9,
+        "algae_pct": 26.8,
+        "sand_rubble_pct": 31.4,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-04",
+        "coral_pct": 41.7,
+        "algae_pct": 28.7,
+        "sand_rubble_pct": 29.6,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2025-05",
+        "coral_pct": 41,
+        "algae_pct": 30,
+        "sand_rubble_pct": 29.1,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-06",
+        "coral_pct": 41.8,
+        "algae_pct": 29.8,
+        "sand_rubble_pct": 28.4,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2025-07",
+        "coral_pct": 41.5,
+        "algae_pct": 28,
+        "sand_rubble_pct": 30.5,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-08",
+        "coral_pct": 41.3,
+        "algae_pct": 28.7,
+        "sand_rubble_pct": 29.9,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2025-09",
+        "coral_pct": 41.6,
+        "algae_pct": 27.8,
+        "sand_rubble_pct": 30.5,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2025-10",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2025-11",
+        "coral_pct": 42.6,
+        "algae_pct": 26.8,
+        "sand_rubble_pct": 30.6,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2025-12",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-01",
+        "coral_pct": null,
+        "algae_pct": null,
+        "sand_rubble_pct": null,
+        "cloud_free_obs": 0
+      },
+      {
+        "month": "2026-02",
+        "coral_pct": 41.3,
+        "algae_pct": 27.5,
+        "sand_rubble_pct": 31.2,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-03",
+        "coral_pct": 41.4,
+        "algae_pct": 26.9,
+        "sand_rubble_pct": 31.6,
+        "cloud_free_obs": 3
+      },
+      {
+        "month": "2026-04",
+        "coral_pct": 39.9,
+        "algae_pct": 30.6,
+        "sand_rubble_pct": 29.5,
+        "cloud_free_obs": 5
+      },
+      {
+        "month": "2026-05",
+        "coral_pct": 37.6,
+        "algae_pct": 31.8,
+        "sand_rubble_pct": 30.6,
+        "cloud_free_obs": 4
+      },
+      {
+        "month": "2026-06",
+        "coral_pct": 37.8,
+        "algae_pct": 30.7,
+        "sand_rubble_pct": 31.5,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-07",
+        "coral_pct": 39.2,
+        "algae_pct": 29.3,
+        "sand_rubble_pct": 31.5,
+        "cloud_free_obs": 6
+      },
+      {
+        "month": "2026-08",
+        "coral_pct": 42.9,
+        "algae_pct": 27,
+        "sand_rubble_pct": 30.1,
+        "cloud_free_obs": 2
+      },
+      {
+        "month": "2026-09",
+        "coral_pct": 41.3,
+        "algae_pct": 28.3,
+        "sand_rubble_pct": 30.4,
+        "cloud_free_obs": 2
+      }
+    ],
+    "heat_stress": [
+      {
+        "month": "2025-10",
+        "dhw": 0.1,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2025-11",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2025-12",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-01",
+        "dhw": 0.2,
+        "dhw_previous_year": 0.2
+      },
+      {
+        "month": "2026-02",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-03",
+        "dhw": 0.6,
+        "dhw_previous_year": 0.5
+      },
+      {
+        "month": "2026-04",
+        "dhw": 2.7,
+        "dhw_previous_year": 1.5
+      },
+      {
+        "month": "2026-05",
+        "dhw": 3.9,
+        "dhw_previous_year": 2.2
+      },
+      {
+        "month": "2026-06",
+        "dhw": 2.7,
+        "dhw_previous_year": 1.6
+      },
+      {
+        "month": "2026-07",
+        "dhw": 0.8,
+        "dhw_previous_year": 0.4
+      },
+      {
+        "month": "2026-08",
+        "dhw": 0.3,
+        "dhw_previous_year": 0.3
+      },
+      {
+        "month": "2026-09",
+        "dhw": 0.4,
+        "dhw_previous_year": 0.4
+      }
+    ],
+    "method_note": "Monthly Sentinel-2 composite, depth-invariant index and supervised benthic classifier (sample data)."
+  }
+}

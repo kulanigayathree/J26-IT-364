@@ -1,0 +1,145 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "bar-reef",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.72, 8.37]
+      },
+      "properties": {
+        "id": "bar-reef",
+        "name": "Bar Reef Marine Sanctuary",
+        "region": "Puttalam",
+        "latest_month": "2026-09",
+        "coral_cover_pct": 30.5,
+        "algae_cover_pct": 28,
+        "sand_rubble_pct": 41.5,
+        "change_12m_pct": -3.1,
+        "status": "watch",
+        "max_dhw_12m": 6.7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hikkaduwa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.093, 6.139]
+      },
+      "properties": {
+        "id": "hikkaduwa",
+        "name": "Hikkaduwa National Park",
+        "region": "Galle",
+        "latest_month": "2026-04",
+        "coral_cover_pct": 10.4,
+        "algae_cover_pct": 34.3,
+        "sand_rubble_pct": 55.3,
+        "change_12m_pct": -5.5,
+        "status": "degraded",
+        "max_dhw_12m": 8
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "unawatuna",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.249, 6.006]
+      },
+      "properties": {
+        "id": "unawatuna",
+        "name": "Unawatuna Reef",
+        "region": "Galle",
+        "latest_month": "2026-07",
+        "coral_cover_pct": 21.2,
+        "algae_cover_pct": 32.3,
+        "sand_rubble_pct": 46.5,
+        "change_12m_pct": -3,
+        "status": "watch",
+        "max_dhw_12m": 5.3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "polhena",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [80.52, 5.935]
+      },
+      "properties": {
+        "id": "polhena",
+        "name": "Polhena Reef",
+        "region": "Matara",
+        "latest_month": "2026-09",
+        "coral_cover_pct": 17.3,
+        "algae_cover_pct": 30,
+        "sand_rubble_pct": 52.7,
+        "change_12m_pct": -2.2,
+        "status": "watch",
+        "max_dhw_12m": 7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "great-basses",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [81.97, 6.18]
+      },
+      "properties": {
+        "id": "great-basses",
+        "name": "Great Basses Reef",
+        "region": "Hambantota (offshore)",
+        "latest_month": "2026-09",
+        "coral_cover_pct": 27.7,
+        "algae_cover_pct": 30.2,
+        "sand_rubble_pct": 42.2,
+        "change_12m_pct": -1.7,
+        "status": "watch",
+        "max_dhw_12m": 8.7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kayankerni",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [81.55, 7.98]
+      },
+      "properties": {
+        "id": "kayankerni",
+        "name": "Kayankerni Reef",
+        "region": "Batticaloa",
+        "latest_month": "2026-09",
+        "coral_cover_pct": 37.8,
+        "algae_cover_pct": 26.6,
+        "sand_rubble_pct": 35.6,
+        "change_12m_pct": 0.5,
+        "status": "healthy",
+        "max_dhw_12m": 3.7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "pigeon-island",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [81.21, 8.722]
+      },
+      "properties": {
+        "id": "pigeon-island",
+        "name": "Pigeon Island National Park",
+        "region": "Trincomalee",
+        "latest_month": "2026-09",
+        "coral_cover_pct": 41.3,
+        "algae_cover_pct": 28.3,
+        "sand_rubble_pct": 30.4,
+        "change_12m_pct": -0.3,
+        "status": "healthy",
+        "max_dhw_12m": 3.9
+      }
+    }
+  ]
+}

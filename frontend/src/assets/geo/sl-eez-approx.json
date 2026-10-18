@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "name": "sl-eez-approx",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "LKA-EEZ-approx",
+      "properties": {
+        "name": "Sri Lanka EEZ (approximate)",
+        "note": "PLACEHOLDER: hand-drawn, simplified and NOT accurate. Replace with the official Sri Lanka EEZ boundary from Marine Regions (https://www.marineregions.org, 'Sri Lankan Exclusive Economic Zone') before any analysis or demo. See README.md in this folder."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [79.45, 9.1],
+            [79.55, 9.6],
+            [79.85, 9.95],
+            [80.2, 10.1],
+            [80.5, 10.55],
+            [80.85, 10.85],
+            [81.5, 10.95],
+            [82.4, 10.6],
+            [83.3, 10.0],
+            [84.1, 9.1],
+            [84.55, 8.0],
+            [84.6, 6.8],
+            [84.2, 5.7],
+            [83.5, 4.8],
+            [82.5, 4.1],
+            [81.3, 3.75],
+            [80.2, 3.8],
+            [79.2, 4.2],
+            [78.4, 4.9],
+            [78.0, 5.8],
+            [77.95, 6.8],
+            [78.2, 7.6],
+            [78.7, 8.1],
+            [78.95, 8.55],
+            [79.05, 8.8],
+            [79.45, 9.1]
+          ]
+        ]
+      }
+    }
+  ]
+}
