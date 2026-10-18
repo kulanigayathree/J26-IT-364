@@ -23,6 +23,7 @@ import streamlit as st
 from matplotlib.colors import to_rgb
 from matplotlib.patches import Patch
 from rasterio.io import MemoryFile
+from scipy.ndimage import uniform_filter
 
 st.set_page_config(page_title="Reef Health Monitor (C3)", page_icon="🪸", layout="wide")
 
@@ -38,7 +39,7 @@ COLORS = {11: "#f4e4b0", 12: "#b0a99f", 13: "#5f6b7a", 14: "#3f9c4a",
           15: "#ff7f50", 18: "#8b5a2b"}
 
 
-# ---------------- preprocessing (must match the training notebook) ----------------
+# ---------------- preprocessing (must match the training notebooks) ----------------
 def read_tif(src):
     arr = src.read().astype("float32")
     arr[arr <= 0] = np.nan          # nodata (-9999) and invalid pixels
@@ -58,18 +59,50 @@ def estimate_glint(arr, dark_pct=10):
     return g
 
 
+def nanmean_filter(x, size):
+    valid = np.isfinite(x)
+    num = uniform_filter(np.where(valid, x, 0.0).astype("float64"), size=size, mode="nearest")
+    den = uniform_filter(valid.astype("float64"), size=size, mode="nearest")
+    with np.errstate(invalid="ignore", divide="ignore"):
+        m = num / den
+    m[den < 0.5] = np.nan
+    return m.astype("float32")
+
+
+def nanstd_filter(x, size):
+    m, m2 = nanmean_filter(x, size), nanmean_filter(x * x, size)
+    return np.sqrt(np.clip(m2 - m * m, 0, None))
+
+
+def feature_spec(bundle):
+    return bundle.get("feature_spec", {"glint_dark_pct": bundle.get("glint_dark_pct", 10), "neigh_sizes": []})
+
+
 def make_features(arr, bundle):
-    g = estimate_glint(arr, bundle.get("glint_dark_pct", 10))
+    spec = feature_spec(bundle)
+    g = estimate_glint(arr, spec.get("glint_dark_pct", 10))
     f = {}
     for i, b in enumerate(["B2", "B3", "B4"]):
         f[b] = arr[i]
         f[b + "g"] = np.clip(arr[i] - g[b] * (arr[3] - g["min_nir"]), 1e-4, None)
     f["r23"] = np.log(f["B2g"]) - np.log(f["B3g"])
     f["r24"] = np.log(f["B2g"]) - np.log(f["B4g"])
+    sizes = spec.get("neigh_sizes", [])
+    for b in ["B2g", "B3g", "B4g"]:
+        for k in sizes:
+            f[f"{b}_m{k}"] = nanmean_filter(f[b], k)
+        if sizes:
+            f[f"{b}_s{max(sizes)}"] = nanstd_filter(f[b], max(sizes))
     return np.stack([f[k] for k in bundle["features"]], axis=-1), g
 
 
-def predict(arr, bundle, mask=None):
+def majority_filter(pred, valid, codes, size=3):
+    counts = np.stack([uniform_filter(((pred == c) & valid).astype("float32"), size, mode="nearest")
+                       for c in codes])
+    return np.where(valid, np.asarray(codes)[counts.argmax(0)], 0).astype(pred.dtype)
+
+
+def predict(arr, bundle, mask=None, smooth=False):
     feat, g = make_features(arr, bundle)
     valid = np.isfinite(feat).all(axis=-1)
     if mask is not None:
@@ -78,18 +111,23 @@ def predict(arr, bundle, mask=None):
     if valid.any():
         y = bundle["model"].predict(feat[valid])
         pred[valid] = bundle["le"].inverse_transform(np.asarray(y).astype(int))
+        if smooth:
+            pred = majority_filter(pred, valid, list(bundle["le"].classes_), bundle.get("smooth_size", 3))
     return pred, valid, g
 
 
 def reef_mask_for(name, shape):
-    """Use data/ACA_<SITE>_label.tif as reef-extent mask when it matches the image."""
-    m = re.match(r"S2_(\w+?)_composite", name)
-    path = os.path.join(DATA_DIR, f"ACA_{m.group(1)}_label.tif") if m else None
-    if path and os.path.exists(path):
-        with rasterio.open(path) as src:
-            aca = src.read(1)
-        if aca.shape == shape:
-            return aca > 0
+    """Use data/ACA_<SITE>_label[_v2].tif (band 1) as reef-extent mask when it matches the image."""
+    m = re.match(r"S2_([A-Za-z0-9]+)_composite", name)
+    if not m:
+        return None
+    for fn in [f"ACA_{m.group(1)}_label_v2.tif", f"ACA_{m.group(1)}_label.tif"]:
+        path = os.path.join(DATA_DIR, fn)
+        if os.path.exists(path):
+            with rasterio.open(path) as src:
+                aca = src.read(1)
+            if aca.shape == shape:
+                return aca > 0
     return None
 
 
@@ -139,18 +177,20 @@ except FileNotFoundError:
 
 with st.sidebar:
     st.header("Input")
-    files = sorted(glob.glob(os.path.join(DATA_DIR, "S2_*.tif")))
+    files = sorted(glob.glob(os.path.join(DATA_DIR, "S2_*.tif")), key=lambda p: ("_v2" not in p, p))
     names = [os.path.basename(f) for f in files]
     choice = st.selectbox("Sentinel-2 composite", names) if names else None
     upload = st.file_uploader("…or upload a GeoTIFF (B2,B3,B4,B8,B11 ×10000)",
                               type=["tif", "tiff"])
     use_mask = st.checkbox("Limit to reef extent (ACA)", value=True,
                            help="Classify only inside the Allen Coral Atlas reef extent when "
-                                "a matching data/ACA_<SITE>_label.tif exists.")
+                                "a matching data/ACA_<SITE>_label(_v2).tif exists.")
+    use_smooth = st.checkbox("Smooth map (3×3 majority filter)", value=bool(bundle.get("smooth_size")),
+                             help="Removes isolated 'salt-and-pepper' pixels.")
     run = st.button("Run model", type="primary", width="stretch")
     st.markdown("---")
     st.markdown(f"**Model:** {bundle.get('name', 'unknown')}")
-    st.markdown(f"**Preprocessing:** {bundle.get('feature_set', '-')}")
+    st.markdown(f"**Experiment:** {bundle.get('experiment', bundle.get('feature_set', '-'))}")
     st.markdown(f"**Features:** {', '.join(bundle.get('features', []))}")
     if "cv_macro_f1" in bundle:
         st.markdown(f"**Spatial-CV macro-F1:** {bundle['cv_macro_f1']:.3f}")
@@ -169,7 +209,7 @@ if run:
         st.stop()
     mask = reef_mask_for(label, arr.shape[1:]) if use_mask else None
     with st.spinner("Correcting sunglint and classifying pixels…"):
-        pred, valid, g = predict(arr, bundle, mask)
+        pred, valid, g = predict(arr, bundle, mask, use_smooth)
     st.session_state["result"] = (label, arr, pred, valid, g, mask is not None)
 
 tab_map, tab_cover, tab_model, tab_dhw = st.tabs(
@@ -231,13 +271,14 @@ with tab_model:
 
     abl = os.path.join(RESULTS_DIR, "ablation_results.csv")
     if os.path.exists(abl):
-        st.subheader("Preprocessing ablation (macro-F1)")
+        st.subheader("Experiments (macro-F1)")
         a = pd.read_csv(abl)
         st.dataframe(a.pivot(index="model", columns="feature_set", values="macro_f1").round(3),
                      width="stretch")
-        st.caption("FS1 = raw bands · FS2 = + sunglint correction · FS3 = + depth-invariant log ratios")
+        st.caption("E0 = Day 2 baseline (v1 composite) · E1 = cleaner v2 composite · "
+                   "E2 = + label purity filter · E3 = + neighbourhood (context) features")
 
-    imgs = [p for p in ["confusion_matrix.png", "ablation_macro_f1.png", "feature_importance.png"]
+    imgs = [p for p in ["improvement_macro_f1.png", "confusion_matrix.png", "ablation_macro_f1.png"]
             if os.path.exists(os.path.join(RESULTS_DIR, p))]
     if imgs:
         cols = st.columns(len(imgs))

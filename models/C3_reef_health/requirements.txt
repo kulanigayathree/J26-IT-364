@@ -2,6 +2,7 @@
 streamlit
 rasterio
 numpy
+scipy
 pandas
 matplotlib
 joblib
