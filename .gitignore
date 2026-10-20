@@ -8,3 +8,6 @@ data/processed/*.parquet
 models/*.pkl
 __pycache__/
 .streamlit/
+*.nc
+*.pt
+*.npz

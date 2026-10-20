@@ -1,0 +1,10 @@
+# Demo app (laptop). Match scikit-learn / xgboost to the versions printed by the Day 2 notebook (cell C1).
+streamlit
+rasterio
+numpy
+scipy
+pandas
+matplotlib
+joblib
+scikit-learn
+xgboost
