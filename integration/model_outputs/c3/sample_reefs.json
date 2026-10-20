@@ -1,0 +1,1433 @@
+{
+  "model_name": "C3 Random Forest benthic classifier (Sentinel-2)",
+  "model_version": "0.5-sample",
+  "generated_at": "2026-10-21T00:30:00Z",
+  "classes": [
+    "Coral",
+    "Algae",
+    "Other"
+  ],
+  "reefs": [
+    {
+      "id": "bar-reef",
+      "name": "Bar Reef Marine Sanctuary",
+      "region": "Puttalam",
+      "lon": 79.72,
+      "lat": 8.37,
+      "status": "good",
+      "change_12m": -0.7,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 34.0,
+            "Algae": 28.2,
+            "Other": 37.8
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 34.1,
+            "Algae": 29.2,
+            "Other": 36.8
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 33.5,
+            "Algae": 28.3,
+            "Other": 38.2
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 33.0,
+            "Algae": 29.3,
+            "Other": 37.7
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 33.0,
+            "Algae": 28.0,
+            "Other": 39.0
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 34.1,
+            "Algae": 29.5,
+            "Other": 36.3
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 31.3,
+            "Algae": 31.9,
+            "Other": 36.8
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 30.8,
+            "Algae": 29.9,
+            "Other": 39.4
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 31.0,
+            "Algae": 31.5,
+            "Other": 37.4
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 30.8,
+            "Algae": 31.9,
+            "Other": 37.3
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 31.7,
+            "Algae": 27.3,
+            "Other": 41.0
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 32.7,
+            "Algae": 29.7,
+            "Other": 37.6
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 32.0,
+            "Algae": 28.4,
+            "Other": 39.6
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 31.9,
+            "Algae": 28.6,
+            "Other": 39.4
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 31.9,
+            "Algae": 28.3,
+            "Other": 39.8
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 31.4,
+            "Algae": 29.3,
+            "Other": 39.3
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 33.0,
+            "Algae": 27.7,
+            "Other": 39.2
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 31.9,
+            "Algae": 29.3,
+            "Other": 38.8
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 27.4,
+            "Algae": 33.3,
+            "Other": 39.2
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 22.1,
+            "Algae": 36.0,
+            "Other": 41.9
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 23.6,
+            "Algae": 35.6,
+            "Other": 40.8
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 25.8,
+            "Algae": 35.0,
+            "Other": 39.2
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 31.5,
+            "Algae": 29.4,
+            "Other": 39.0
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 32.0,
+            "Algae": 28.8,
+            "Other": 39.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "hikkaduwa",
+      "name": "Hikkaduwa National Park",
+      "region": "Galle",
+      "lon": 80.093,
+      "lat": 6.139,
+      "status": "at_risk",
+      "change_12m": -2.1,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 19.6,
+            "Algae": 28.8,
+            "Other": 51.6
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 17.7,
+            "Algae": 28.3,
+            "Other": 54.1
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 17.7,
+            "Algae": 28.9,
+            "Other": 53.4
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 17.9,
+            "Algae": 29.3,
+            "Other": 52.8
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 17.6,
+            "Algae": 27.3,
+            "Other": 55.1
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 17.0,
+            "Algae": 28.2,
+            "Other": 54.8
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 16.6,
+            "Algae": 30.8,
+            "Other": 52.6
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 14.4,
+            "Algae": 31.3,
+            "Other": 54.3
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 15.9,
+            "Algae": 30.5,
+            "Other": 53.6
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 14.3,
+            "Algae": 32.0,
+            "Other": 53.7
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 16.1,
+            "Algae": 30.5,
+            "Other": 53.4
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 15.5,
+            "Algae": 29.1,
+            "Other": 55.4
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 16.1,
+            "Algae": 29.1,
+            "Other": 54.8
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 14.7,
+            "Algae": 31.3,
+            "Other": 54.1
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 14.3,
+            "Algae": 30.5,
+            "Other": 55.3
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 15.4,
+            "Algae": 30.2,
+            "Other": 54.4
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 14.1,
+            "Algae": 29.2,
+            "Other": 56.7
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 13.4,
+            "Algae": 29.7,
+            "Other": 56.9
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 9.7,
+            "Algae": 34.5,
+            "Other": 55.8
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 7.1,
+            "Algae": 35.0,
+            "Other": 57.9
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 8.2,
+            "Algae": 36.6,
+            "Other": 55.2
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 10.1,
+            "Algae": 33.5,
+            "Other": 56.4
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 13.5,
+            "Algae": 32.4,
+            "Other": 54.0
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 13.4,
+            "Algae": 30.2,
+            "Other": 56.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "unawatuna",
+      "name": "Unawatuna Reef",
+      "region": "Galle",
+      "lon": 80.249,
+      "lat": 6.006,
+      "status": "watch",
+      "change_12m": -0.7,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 25.1,
+            "Algae": 27.2,
+            "Other": 47.7
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 24.8,
+            "Algae": 29.1,
+            "Other": 46.2
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 26.8,
+            "Algae": 26.8,
+            "Other": 46.3
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 25.9,
+            "Algae": 28.2,
+            "Other": 45.9
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 25.3,
+            "Algae": 28.0,
+            "Other": 46.7
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 26.7,
+            "Algae": 26.9,
+            "Other": 46.4
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 25.1,
+            "Algae": 30.4,
+            "Other": 44.5
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 23.4,
+            "Algae": 29.3,
+            "Other": 47.3
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 23.6,
+            "Algae": 28.1,
+            "Other": 48.2
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 23.6,
+            "Algae": 28.0,
+            "Other": 48.4
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 26.2,
+            "Algae": 27.6,
+            "Other": 46.2
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 25.4,
+            "Algae": 27.4,
+            "Other": 47.2
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 25.0,
+            "Algae": 29.0,
+            "Other": 45.9
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 25.1,
+            "Algae": 29.5,
+            "Other": 45.4
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 24.5,
+            "Algae": 27.1,
+            "Other": 48.4
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 23.6,
+            "Algae": 27.5,
+            "Other": 48.9
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 24.9,
+            "Algae": 29.9,
+            "Other": 45.1
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 23.9,
+            "Algae": 29.5,
+            "Other": 46.6
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 21.4,
+            "Algae": 30.2,
+            "Other": 48.4
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 19.4,
+            "Algae": 32.5,
+            "Other": 48.1
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 20.4,
+            "Algae": 30.8,
+            "Other": 48.8
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 22.4,
+            "Algae": 30.5,
+            "Other": 47.1
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 23.8,
+            "Algae": 29.1,
+            "Other": 47.0
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 24.7,
+            "Algae": 27.8,
+            "Other": 47.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "polhena",
+      "name": "Polhena Reef",
+      "region": "Matara",
+      "lon": 80.52,
+      "lat": 5.935,
+      "status": "at_risk",
+      "change_12m": -2.9,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 21.9,
+            "Algae": 27.4,
+            "Other": 50.6
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 19.7,
+            "Algae": 29.5,
+            "Other": 50.9
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 21.8,
+            "Algae": 26.9,
+            "Other": 51.3
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 21.3,
+            "Algae": 27.2,
+            "Other": 51.6
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 21.3,
+            "Algae": 27.3,
+            "Other": 51.4
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 18.9,
+            "Algae": 27.4,
+            "Other": 53.7
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 18.4,
+            "Algae": 31.7,
+            "Other": 49.9
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 17.2,
+            "Algae": 29.4,
+            "Other": 53.4
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 16.5,
+            "Algae": 30.4,
+            "Other": 53.1
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 16.1,
+            "Algae": 32.0,
+            "Other": 51.9
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 18.9,
+            "Algae": 29.3,
+            "Other": 51.8
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 19.8,
+            "Algae": 27.8,
+            "Other": 52.4
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 19.2,
+            "Algae": 30.2,
+            "Other": 50.6
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 17.6,
+            "Algae": 29.5,
+            "Other": 52.9
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 19.3,
+            "Algae": 30.1,
+            "Other": 50.7
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 17.6,
+            "Algae": 29.6,
+            "Other": 52.8
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 17.3,
+            "Algae": 29.3,
+            "Other": 53.4
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 18.1,
+            "Algae": 28.5,
+            "Other": 53.4
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 13.3,
+            "Algae": 34.3,
+            "Other": 52.4
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 11.0,
+            "Algae": 36.3,
+            "Other": 52.7
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 10.1,
+            "Algae": 35.5,
+            "Other": 54.4
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 12.5,
+            "Algae": 33.0,
+            "Other": 54.4
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 17.4,
+            "Algae": 30.2,
+            "Other": 52.4
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 16.9,
+            "Algae": 30.8,
+            "Other": 52.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "great-basses",
+      "name": "Great Basses Reef",
+      "region": "Hambantota",
+      "lon": 81.97,
+      "lat": 6.18,
+      "status": "watch",
+      "change_12m": 0.6,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 30.4,
+            "Algae": 28.6,
+            "Other": 41.0
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 29.4,
+            "Algae": 28.5,
+            "Other": 42.0
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 29.6,
+            "Algae": 27.2,
+            "Other": 43.2
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 29.8,
+            "Algae": 27.5,
+            "Other": 42.7
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 30.8,
+            "Algae": 27.2,
+            "Other": 42.0
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 30.5,
+            "Algae": 29.3,
+            "Other": 40.1
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 28.0,
+            "Algae": 30.9,
+            "Other": 41.1
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 26.7,
+            "Algae": 31.3,
+            "Other": 42.0
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 27.0,
+            "Algae": 30.8,
+            "Other": 42.2
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 28.0,
+            "Algae": 30.3,
+            "Other": 41.7
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 28.9,
+            "Algae": 29.8,
+            "Other": 41.3
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 28.4,
+            "Algae": 29.3,
+            "Other": 42.3
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 28.0,
+            "Algae": 28.6,
+            "Other": 43.4
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 28.2,
+            "Algae": 29.1,
+            "Other": 42.6
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 29.8,
+            "Algae": 28.4,
+            "Other": 41.8
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 28.0,
+            "Algae": 28.6,
+            "Other": 43.4
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 27.9,
+            "Algae": 29.9,
+            "Other": 42.1
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 28.3,
+            "Algae": 29.6,
+            "Other": 42.1
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 23.8,
+            "Algae": 31.4,
+            "Other": 44.8
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 19.4,
+            "Algae": 34.2,
+            "Other": 46.4
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 19.6,
+            "Algae": 35.5,
+            "Other": 44.9
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 22.5,
+            "Algae": 32.6,
+            "Other": 44.9
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 28.5,
+            "Algae": 30.0,
+            "Other": 41.5
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 29.0,
+            "Algae": 30.1,
+            "Other": 40.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "kayankerni",
+      "name": "Kayankerni Reef",
+      "region": "Batticaloa",
+      "lon": 81.55,
+      "lat": 7.98,
+      "status": "good",
+      "change_12m": 2.3,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 37.3,
+            "Algae": 29.4,
+            "Other": 33.4
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 38.2,
+            "Algae": 28.5,
+            "Other": 33.3
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 36.5,
+            "Algae": 27.1,
+            "Other": 36.4
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 36.9,
+            "Algae": 28.3,
+            "Other": 34.8
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 37.1,
+            "Algae": 29.2,
+            "Other": 33.8
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 37.4,
+            "Algae": 28.8,
+            "Other": 33.8
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 36.6,
+            "Algae": 27.3,
+            "Other": 36.1
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 35.8,
+            "Algae": 27.3,
+            "Other": 36.9
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 37.2,
+            "Algae": 28.4,
+            "Other": 34.4
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 36.5,
+            "Algae": 27.6,
+            "Other": 35.9
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 37.9,
+            "Algae": 27.4,
+            "Other": 34.8
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 36.5,
+            "Algae": 27.7,
+            "Other": 35.9
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 37.2,
+            "Algae": 27.6,
+            "Other": 35.2
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 37.0,
+            "Algae": 27.6,
+            "Other": 35.4
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 36.4,
+            "Algae": 28.2,
+            "Other": 35.4
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 37.5,
+            "Algae": 26.8,
+            "Other": 35.6
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 37.6,
+            "Algae": 26.7,
+            "Other": 35.7
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 38.5,
+            "Algae": 29.0,
+            "Other": 32.5
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 36.4,
+            "Algae": 27.7,
+            "Other": 35.9
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 35.9,
+            "Algae": 28.7,
+            "Other": 35.4
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 34.8,
+            "Algae": 31.3,
+            "Other": 33.9
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 36.2,
+            "Algae": 28.1,
+            "Other": 35.7
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 39.0,
+            "Algae": 27.1,
+            "Other": 33.9
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 38.8,
+            "Algae": 28.3,
+            "Other": 32.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "pigeon-island",
+      "name": "Pigeon Island National Park",
+      "region": "Trincomalee",
+      "lon": 81.21,
+      "lat": 8.722,
+      "status": "good",
+      "change_12m": 1.0,
+      "monthly": [
+        {
+          "month": "2024-10",
+          "cover": {
+            "Coral": 41.6,
+            "Algae": 28.0,
+            "Other": 30.4
+          }
+        },
+        {
+          "month": "2024-11",
+          "cover": {
+            "Coral": 42.5,
+            "Algae": 28.6,
+            "Other": 28.9
+          }
+        },
+        {
+          "month": "2024-12",
+          "cover": {
+            "Coral": 43.1,
+            "Algae": 28.2,
+            "Other": 28.7
+          }
+        },
+        {
+          "month": "2025-01",
+          "cover": {
+            "Coral": 41.0,
+            "Algae": 27.4,
+            "Other": 31.6
+          }
+        },
+        {
+          "month": "2025-02",
+          "cover": {
+            "Coral": 41.9,
+            "Algae": 28.3,
+            "Other": 29.8
+          }
+        },
+        {
+          "month": "2025-03",
+          "cover": {
+            "Coral": 42.7,
+            "Algae": 28.1,
+            "Other": 29.2
+          }
+        },
+        {
+          "month": "2025-04",
+          "cover": {
+            "Coral": 42.0,
+            "Algae": 29.0,
+            "Other": 29.0
+          }
+        },
+        {
+          "month": "2025-05",
+          "cover": {
+            "Coral": 40.1,
+            "Algae": 28.9,
+            "Other": 31.0
+          }
+        },
+        {
+          "month": "2025-06",
+          "cover": {
+            "Coral": 40.8,
+            "Algae": 30.2,
+            "Other": 29.1
+          }
+        },
+        {
+          "month": "2025-07",
+          "cover": {
+            "Coral": 41.9,
+            "Algae": 27.6,
+            "Other": 30.4
+          }
+        },
+        {
+          "month": "2025-08",
+          "cover": {
+            "Coral": 41.3,
+            "Algae": 27.3,
+            "Other": 31.4
+          }
+        },
+        {
+          "month": "2025-09",
+          "cover": {
+            "Coral": 41.6,
+            "Algae": 28.5,
+            "Other": 29.9
+          }
+        },
+        {
+          "month": "2025-10",
+          "cover": {
+            "Coral": 41.2,
+            "Algae": 28.1,
+            "Other": 30.8
+          }
+        },
+        {
+          "month": "2025-11",
+          "cover": {
+            "Coral": 41.2,
+            "Algae": 28.4,
+            "Other": 30.4
+          }
+        },
+        {
+          "month": "2025-12",
+          "cover": {
+            "Coral": 43.0,
+            "Algae": 26.9,
+            "Other": 30.1
+          }
+        },
+        {
+          "month": "2026-01",
+          "cover": {
+            "Coral": 42.0,
+            "Algae": 29.2,
+            "Other": 28.8
+          }
+        },
+        {
+          "month": "2026-02",
+          "cover": {
+            "Coral": 42.7,
+            "Algae": 27.6,
+            "Other": 29.7
+          }
+        },
+        {
+          "month": "2026-03",
+          "cover": {
+            "Coral": 41.3,
+            "Algae": 28.6,
+            "Other": 30.1
+          }
+        },
+        {
+          "month": "2026-04",
+          "cover": {
+            "Coral": 39.8,
+            "Algae": 28.8,
+            "Other": 31.5
+          }
+        },
+        {
+          "month": "2026-05",
+          "cover": {
+            "Coral": 39.1,
+            "Algae": 30.4,
+            "Other": 30.5
+          }
+        },
+        {
+          "month": "2026-06",
+          "cover": {
+            "Coral": 37.6,
+            "Algae": 30.3,
+            "Other": 32.0
+          }
+        },
+        {
+          "month": "2026-07",
+          "cover": {
+            "Coral": 38.8,
+            "Algae": 30.0,
+            "Other": 31.3
+          }
+        },
+        {
+          "month": "2026-08",
+          "cover": {
+            "Coral": 41.8,
+            "Algae": 26.3,
+            "Other": 31.9
+          }
+        },
+        {
+          "month": "2026-09",
+          "cover": {
+            "Coral": 42.6,
+            "Algae": 26.6,
+            "Other": 30.8
+          }
+        }
+      ]
+    }
+  ]
+}

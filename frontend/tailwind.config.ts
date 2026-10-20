@@ -1,46 +1,15 @@
 import type { Config } from 'tailwindcss';
-import {
-  colors,
-  fillSteps,
-  fontFamily,
-  fontSize,
-  layout,
-  radius,
-  screens,
-  shadow,
-  spacing,
-} from './src/design/tokens';
+import { colors, fonts } from './src/theme';
 
-const colorNames = Object.keys(colors).join('|');
-
-/**
- * The theme is generated from src/design/tokens.ts. Do not add values here: add a token instead.
- * Colours, fonts, font sizes, spacing, radius and shadows REPLACE Tailwind's defaults.
- */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  // Legend swatches use bg-<token>/<step> built at runtime (src/design/classes.ts).
-  safelist: [{ pattern: new RegExp(`^bg-(${colorNames})/(${fillSteps.join('|')})$`) }],
   theme: {
-    screens,
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      inherit: 'inherit',
-      ...colors,
-    },
-    fontFamily,
-    fontSize,
-    spacing,
-    borderRadius: radius,
-    boxShadow: shadow,
-    extend: {
-      height: layout.height,
-      minHeight: layout.height,
-      width: layout.width,
-      maxWidth: layout.maxWidth,
-      zIndex: layout.zIndex,
-    },
+    // Only the project colours from theme.ts (Tailwind's default palette is switched off).
+    colors: { transparent: 'transparent', current: 'currentColor', ...colors },
+    fontFamily: fonts,
+    borderRadius: { none: '0', DEFAULT: '4px', full: '9999px' },
+    boxShadow: { none: 'none', DEFAULT: '0 1px 2px rgba(15, 36, 51, 0.10)' },
+    extend: {},
   },
   plugins: [],
 } satisfies Config;

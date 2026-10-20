@@ -1,50 +1,44 @@
-"""C2 – Catch-conditioned fishing-zone prediction (owner: Gayathree M.G.K)."""
+"""C2 – Fishing-Zone Prediction with Uncertainty."""
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
-from app.core.mock import load_mock
-from app.schemas.c2 import LEAD_TIMES, BestZone, Forecast, ForecastGrid, Port
+from app.adapters import c2 as adapter
+from app.auth import get_current_user
+from app.schemas.c2 import C2Data, C2Forecast, C2Summary, C2Zones
 
-router = APIRouter(prefix="/api/c2", tags=["C2 Fishing zone"])
-
-DEFAULT_PORT = "negombo"
-LEAD_TIME_HELP = "Forecast lead time in hours: 24, 48 or 72"
+router = APIRouter(prefix="/api/c2", tags=["C2 Fishing zone"], dependencies=[Depends(get_current_user)])
 
 
-def _check_lead_time(lead_time_h: int) -> int:
-    if lead_time_h not in LEAD_TIMES:
-        raise HTTPException(status_code=422, detail=f"lead_time_h must be one of {LEAD_TIMES}.")
-    return lead_time_h
+@router.get("/summary", response_model=C2Summary)
+def summary() -> C2Summary:
+    return adapter.get_data().summary
 
 
-def _best_zone(port_id: str, lead_time_h: int) -> BestZone:
-    # TODO(C2): replace with the fuel-aware ranking of the forecast grid for this port.
-    for zone in load_mock("c2", "best_zones.json"):
-        if zone["port_id"] == port_id and zone["lead_time_h"] == lead_time_h:
-            return BestZone.model_validate(zone)
-    raise HTTPException(status_code=404, detail=f'No forecast for port "{port_id}".')
+@router.get("/data", response_model=C2Data)
+def data() -> C2Data:
+    return adapter.get_data()
 
 
-@router.get("/ports", response_model=list[Port], summary="Fishing harbours")
-def get_ports() -> list[Port]:
-    # TODO(C2): load harbours from PostGIS.
-    return [Port.model_validate(p) for p in load_mock("c2", "ports.json")]
+@router.get("/forecast", response_model=C2Forecast)
+def forecast(lead: int = Query(1, ge=1, le=3, description="Day 1, 2 or 3")) -> C2Forecast:
+    try:
+        return adapter.get_forecast(lead)
+    except KeyError as e:
+        raise HTTPException(404, str(e.args[0]))
 
 
-@router.get("/forecast", response_model=Forecast, summary="Probability grid and best zone")
-def get_forecast(
-    lead_time_h: int = Query(24, description=LEAD_TIME_HELP),
-    port_id: str = Query(DEFAULT_PORT, description="Harbour used for the best zone"),
-) -> Forecast:
-    _check_lead_time(lead_time_h)
-    # TODO(C2): replace with the latest model run (models/C2_fishing_zone) stored in PostGIS.
-    grid = ForecastGrid.model_validate(load_mock("c2", f"forecast_{lead_time_h}.json"))
-    return Forecast(**grid.model_dump(), best_zone=_best_zone(port_id, lead_time_h))
-
-
-@router.get("/best-zone", response_model=BestZone, summary="Best zone for one harbour (fisher view)")
-def get_best_zone(
-    port_id: str = Query(DEFAULT_PORT),
-    lead_time_h: int = Query(24, description=LEAD_TIME_HELP),
-) -> BestZone:
-    return _best_zone(port_id, _check_lead_time(lead_time_h))
+@router.get("/zones", response_model=C2Zones)
+def zones(
+    lead: int = Query(1, ge=1, le=3),
+    port: str = Query(adapter.DEFAULT_PORT),
+    fuel_l_per_km: float = Query(adapter.DEFAULT_FUEL_L_PER_KM, gt=0, le=50),
+    fuel_price: float = Query(adapter.DEFAULT_FUEL_PRICE, ge=0, le=10000, description="Rs per litre"),
+    max_km: float | None = Query(None, gt=0, description="Optional limit on return-trip distance"),
+) -> C2Zones:
+    p = adapter.find_port(port)
+    if p is None:
+        raise HTTPException(404, f'Unknown port "{port}".')
+    try:
+        return adapter.get_zones(lead, p, fuel_l_per_km, fuel_price, max_km)
+    except KeyError as e:
+        raise HTTPException(404, str(e.args[0]))

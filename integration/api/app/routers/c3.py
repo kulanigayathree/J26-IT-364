@@ -1,23 +1,19 @@
-"""C3 – Satellite-derived reef health monitoring (owner: Adikaram W.M.T.P)."""
+"""C3 – Satellite-Derived Reef Health Monitoring."""
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends
 
-from app.core.mock import load_mock
-from app.schemas.c3 import ReefCollection, ReefDetail
+from app.adapters import c3 as adapter
+from app.auth import get_current_user
+from app.schemas.c3 import C3Data, C3Summary
 
-router = APIRouter(prefix="/api/c3", tags=["C3 Reef health"])
-
-
-@router.get("/reefs", response_model=ReefCollection, summary="Monitored reefs with latest cover")
-def get_reefs() -> ReefCollection:
-    # TODO(C3): replace with the latest monthly benthic-cover results from PostGIS.
-    return ReefCollection.model_validate(load_mock("c3", "reefs.json"))
+router = APIRouter(prefix="/api/c3", tags=["C3 Reef health"], dependencies=[Depends(get_current_user)])
 
 
-@router.get("/reefs/{reef_id}", response_model=ReefDetail, summary="Reef time series and heat stress")
-def get_reef(reef_id: str) -> ReefDetail:
-    # TODO(C3): replace with the time series query (models/C3_reef_health).
-    reef = load_mock("c3", "reef_details.json").get(reef_id)
-    if reef is None:
-        raise HTTPException(status_code=404, detail=f'No reef with id "{reef_id}".')
-    return ReefDetail.model_validate(reef)
+@router.get("/summary", response_model=C3Summary)
+def summary() -> C3Summary:
+    return adapter.get_data().summary
+
+
+@router.get("/data", response_model=C3Data)
+def data() -> C3Data:
+    return adapter.get_data()

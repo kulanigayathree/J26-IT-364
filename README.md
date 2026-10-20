@@ -76,23 +76,25 @@ docker-compose up -d
 
 ## Run the app
 
-The web app (React + Vite PWA) lives in `frontend/`, the API (FastAPI) in `integration/api/`.
+The web app (React + Vite) lives in `frontend/`, the API (FastAPI) in `integration/api/`.
+Start the API first, then the frontend in a second terminal.
 
 ```bash
 # API: http://localhost:8000/docs
-cd integration/api
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+cd integration/api && pip install -r requirements.txt && uvicorn app.main:app --reload
 
-# Frontend (Node 20+, in a second terminal): http://localhost:5173
-cd frontend
-npm install
-npm run dev
+# Frontend (Node 20+): http://localhost:5173
+cd frontend && npm install && npm run dev
 ```
 
-The frontend works without the API too: in dev it falls back to sample data in each component's
-`mock/` folder. Before opening a PR run `npm run lint && npm run typecheck && npm run build` in
-`frontend/`. Building a component page? Read [frontend/CONTRIBUTING.md](frontend/CONTRIBUTING.md).
+Open http://localhost:5173, register an account and log in. User accounts are stored in
+`integration/api/app.db` (SQLite, created on first run, not committed).
+
+Each model's results come from a JSON file in `integration/model_outputs/cX/`. Until a member adds
+their file, the app shows sample data with a "Sample data" badge. See
+[integration/MODEL_OUTPUTS.md](integration/MODEL_OUTPUTS.md) for the formats and export snippets.
+
+Before a PR run `npm run typecheck && npm run lint && npm run build` in `frontend/`.
 
 ## Working on the Project
 

@@ -1,0 +1,249 @@
+{
+  "model_name": "C1 Isolation Forest + rules",
+  "model_version": "0.4-sample",
+  "generated_at": "2026-10-21T00:30:00Z",
+  "vessels": [
+    {
+      "vessel_id": "417000231",
+      "name": "Sayuri 3",
+      "type": "Fishing",
+      "lon": 79.42,
+      "lat": 7.18,
+      "time": "2026-10-20T23:35:00Z"
+    },
+    {
+      "vessel_id": "419001877",
+      "name": "Sri Murugan",
+      "type": "Fishing (trawler)",
+      "lon": 79.78,
+      "lat": 9.33,
+      "time": "2026-10-21T00:25:00Z"
+    },
+    {
+      "vessel_id": "563012440",
+      "name": "Pacific Meridian",
+      "type": "Cargo",
+      "lon": 81.6,
+      "lat": 5.72,
+      "time": "2026-10-21T00:20:00Z"
+    },
+    {
+      "vessel_id": "636019822",
+      "name": "Andaman Spirit",
+      "type": "Tanker",
+      "lon": 80.88,
+      "lat": 5.6,
+      "time": "2026-10-20T23:54:00Z"
+    },
+    {
+      "vessel_id": "477330615",
+      "name": "Golden Horizon",
+      "type": "Cargo",
+      "lon": 79.3,
+      "lat": 6.4,
+      "time": "2026-10-21T00:25:00Z"
+    },
+    {
+      "vessel_id": "417000874",
+      "name": "Nimal Putha",
+      "type": "Fishing",
+      "lon": 81.85,
+      "lat": 8.95,
+      "time": "2026-10-21T00:24:00Z"
+    },
+    {
+      "vessel_id": "412440190",
+      "name": "Hai Feng 66",
+      "type": "Fishing (longliner)",
+      "lon": 82.4,
+      "lat": 7.05,
+      "time": "2026-10-21T00:14:00Z"
+    },
+    {
+      "vessel_id": "417000562",
+      "name": "Ruwan Kumari",
+      "type": "Fishing",
+      "lon": 80.8,
+      "lat": 5.0,
+      "time": "2026-10-21T00:04:00Z"
+    },
+    {
+      "vessel_id": "538007731",
+      "name": "Eastern Promise",
+      "type": "Bulk carrier",
+      "lon": 79.9,
+      "lat": 5.65,
+      "time": "2026-10-21T00:11:00Z"
+    },
+    {
+      "vessel_id": "417001346",
+      "name": "Kalpitiya Queen",
+      "type": "Fishing",
+      "lon": 79.55,
+      "lat": 8.3,
+      "time": "2026-10-21T00:16:00Z"
+    },
+    {
+      "vessel_id": "370118220",
+      "name": "MT Indigo Star",
+      "type": "Tanker",
+      "lon": 82.9,
+      "lat": 6.2,
+      "time": "2026-10-20T23:52:00Z"
+    },
+    {
+      "vessel_id": "417000990",
+      "name": "Sea Falcon 7",
+      "type": "Fishing",
+      "lon": 81.35,
+      "lat": 8.75,
+      "time": "2026-10-20T23:44:00Z"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "A001",
+      "vessel_id": "419001877",
+      "vessel_name": "Sri Murugan",
+      "anomaly_type": "route_deviation",
+      "score": 0.91,
+      "severity": "high",
+      "time": "2026-10-20T21:20:00Z",
+      "lon": 79.7946,
+      "lat": 9.3744,
+      "description": "Crossed the maritime boundary and stayed 6 km inside Sri Lankan waters."
+    },
+    {
+      "id": "A002",
+      "vessel_id": "419001877",
+      "vessel_name": "Sri Murugan",
+      "anomaly_type": "ais_gap",
+      "score": 0.78,
+      "severity": "high",
+      "time": "2026-10-20T18:50:00Z",
+      "lon": 79.7988,
+      "lat": 9.2985,
+      "description": "AIS silent for 5 h 40 min near the maritime boundary."
+    },
+    {
+      "id": "A003",
+      "vessel_id": "unknown",
+      "vessel_name": "Unidentified (SAR only)",
+      "anomaly_type": "dark_vessel",
+      "score": 0.84,
+      "severity": "high",
+      "time": "2026-10-20T15:30:00Z",
+      "lon": 81.991,
+      "lat": 9.4219,
+      "description": "SAR detection with no matching AIS signal within 5 km / 30 min."
+    },
+    {
+      "id": "A004",
+      "vessel_id": "412440190",
+      "vessel_name": "Hai Feng 66",
+      "anomaly_type": "dark_vessel",
+      "score": 0.88,
+      "severity": "high",
+      "time": "2026-10-20T13:10:00Z",
+      "lon": 82.4284,
+      "lat": 7.0046,
+      "description": "SAR detection at the last AIS position after AIS was switched off."
+    },
+    {
+      "id": "A005",
+      "vessel_id": "636019822",
+      "vessel_name": "Andaman Spirit",
+      "anomaly_type": "loitering",
+      "score": 0.73,
+      "severity": "high",
+      "time": "2026-10-20T17:15:00Z",
+      "lon": 80.9282,
+      "lat": 5.5768,
+      "description": "Under 1 kn for 3 h outside the shipping lane off Dondra Head."
+    },
+    {
+      "id": "A006",
+      "vessel_id": "636019822",
+      "vessel_name": "Andaman Spirit",
+      "anomaly_type": "speed_change",
+      "score": 0.55,
+      "severity": "medium",
+      "time": "2026-10-20T11:00:00Z",
+      "lon": 80.8395,
+      "lat": 5.5533,
+      "description": "Dropped from 12 kn to 2 kn in 20 min, then resumed."
+    },
+    {
+      "id": "A007",
+      "vessel_id": "417000562",
+      "vessel_name": "Ruwan Kumari",
+      "anomaly_type": "ais_gap",
+      "score": 0.62,
+      "severity": "medium",
+      "time": "2026-10-20T08:25:00Z",
+      "lon": 80.8349,
+      "lat": 4.9891,
+      "description": "AIS gap of 9 h at 4.9° N, probably beyond coastal coverage."
+    },
+    {
+      "id": "A008",
+      "vessel_id": "477330615",
+      "vessel_name": "Golden Horizon",
+      "anomaly_type": "route_deviation",
+      "score": 0.41,
+      "severity": "low",
+      "time": "2026-10-20T04:45:00Z",
+      "lon": 79.3451,
+      "lat": 6.3847,
+      "description": "Left the usual Colombo–Maldives route by 18 km."
+    },
+    {
+      "id": "A009",
+      "vessel_id": "417000874",
+      "vessel_name": "Nimal Putha",
+      "anomaly_type": "speed_change",
+      "score": 0.38,
+      "severity": "low",
+      "time": "2026-10-20T03:20:00Z",
+      "lon": 81.8944,
+      "lat": 8.9933,
+      "description": "Repeated slow–fast pattern, consistent with fishing."
+    },
+    {
+      "id": "A010",
+      "vessel_id": "417000231",
+      "vessel_name": "Sayuri 3",
+      "anomaly_type": "loitering",
+      "score": 0.32,
+      "severity": "low",
+      "time": "2026-10-20T01:50:00Z",
+      "lon": 79.386,
+      "lat": 7.2038,
+      "description": "Slow circling typical of fishing; flagged for review."
+    },
+    {
+      "id": "A011",
+      "vessel_id": "563012440",
+      "vessel_name": "Pacific Meridian",
+      "anomaly_type": "speed_change",
+      "score": 0.29,
+      "severity": "low",
+      "time": "2026-10-19T18:30:00Z",
+      "lon": 81.6225,
+      "lat": 5.7413,
+      "description": "Short speed reduction near the shipping lane."
+    },
+    {
+      "id": "A012",
+      "vessel_id": "417001346",
+      "vessel_name": "Kalpitiya Queen",
+      "anomaly_type": "ais_gap",
+      "score": 0.47,
+      "severity": "medium",
+      "time": "2026-10-19T14:00:00Z",
+      "lon": 79.5308,
+      "lat": 8.3473,
+      "description": "AIS gap of 3 h close to Bar Reef."
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "model_name": "C4 U-Net slick detector + AIS attribution",
+  "model_version": "0.2-sample",
+  "generated_at": "2026-10-21T00:30:00Z",
+  "spills": [
+    {
+      "id": "S1-20261020-01",
+      "location_name": "West of Colombo port",
+      "lon": 79.72,
+      "lat": 6.93,
+      "detected_at": "2026-10-20T00:52:00Z",
+      "sensor": "Sentinel-1",
+      "area_km2": 6.8,
+      "confidence": 0.86,
+      "severity": "high",
+      "status": "active",
+      "polygon": [
+        [
+          79.72785,
+          6.95141
+        ],
+        [
+          79.72744,
+          6.95689
+        ],
+        [
+          79.72338,
+          6.94963
+        ],
+        [
+          79.7203,
+          6.94706
+        ],
+        [
+          79.71674,
+          6.94021
+        ],
+        [
+          79.71446,
+          6.932
+        ],
+        [
+          79.71181,
+          6.92484
+        ],
+        [
+          79.70876,
+          6.91622
+        ],
+        [
+          79.70783,
+          6.90932
+        ],
+        [
+          79.71013,
+          6.90864
+        ],
+        [
+          79.71175,
+          6.9075
+        ],
+        [
+          79.71366,
+          6.9071
+        ],
+        [
+          79.71592,
+          6.9063
+        ],
+        [
+          79.71972,
+          6.91444
+        ],
+        [
+          79.7227,
+          6.92155
+        ],
+        [
+          79.72581,
+          6.9279
+        ],
+        [
+          79.72943,
+          6.93595
+        ],
+        [
+          79.72945,
+          6.94158
+        ],
+        [
+          79.73167,
+          6.94983
+        ],
+        [
+          79.73094,
+          6.95366
+        ],
+        [
+          79.72785,
+          6.95141
+        ]
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "vessel_id": "370118220",
+          "vessel_name": "MT Indigo Star",
+          "score": 0.78,
+          "evidence": [
+            "AIS track crossed the slick footprint 2 h 40 min before the image",
+            "Course aligned with slick axis (±10°)",
+            "AIS gap of 1 h 50 min inside the area"
+          ]
+        },
+        {
+          "rank": 2,
+          "vessel_id": "477330615",
+          "vessel_name": "Golden Horizon",
+          "score": 0.41,
+          "evidence": [
+            "Closest approach 4.8 km, 6 h before the image",
+            "Slowed to 4 kn near the slick"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S1-20261017-01",
+      "location_name": "Dondra Head shipping lane",
+      "lon": 80.62,
+      "lat": 5.66,
+      "detected_at": "2026-10-17T00:47:00Z",
+      "sensor": "Sentinel-1",
+      "area_km2": 14.2,
+      "confidence": 0.91,
+      "severity": "high",
+      "status": "active",
+      "polygon": [
+        [
+          80.65548,
+          5.66623
+        ],
+        [
+          80.65789,
+          5.66985
+        ],
+        [
+          80.64545,
+          5.66937
+        ],
+        [
+          80.64088,
+          5.67151
+        ],
+        [
+          80.62888,
+          5.66967
+        ],
+        [
+          80.61848,
+          5.6686
+        ],
+        [
+          80.60757,
+          5.66646
+        ],
+        [
+          80.59932,
+          5.66325
+        ],
+        [
+          80.58497,
+          5.66018
+        ],
+        [
+          80.57972,
+          5.65624
+        ],
+        [
+          80.58063,
+          5.65309
+        ],
+        [
+          80.58349,
+          5.65051
+        ],
+        [
+          80.59304,
+          5.65008
+        ],
+        [
+          80.60177,
+          5.64995
+        ],
+        [
+          80.60913,
+          5.64816
+        ],
+        [
+          80.62169,
+          5.65045
+        ],
+        [
+          80.63231,
+          5.6536
+        ],
+        [
+          80.64047,
+          5.65678
+        ],
+        [
+          80.64782,
+          5.65986
+        ],
+        [
+          80.65624,
+          5.66338
+        ],
+        [
+          80.65548,
+          5.66623
+        ]
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "vessel_id": "636019822",
+          "vessel_name": "Andaman Spirit",
+          "score": 0.82,
+          "evidence": [
+            "Loitered 3 h inside the slick footprint",
+            "Course aligned with slick axis (±6°)"
+          ]
+        },
+        {
+          "rank": 2,
+          "vessel_id": "563012440",
+          "vessel_name": "Pacific Meridian",
+          "score": 0.44,
+          "evidence": [
+            "Passed 3.1 km south of the slick 5 h before the image"
+          ]
+        },
+        {
+          "rank": 3,
+          "vessel_id": "538007731",
+          "vessel_name": "Eastern Promise",
+          "score": 0.27,
+          "evidence": [
+            "Closest approach 7.5 km, 9 h before the image"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S1-20261013-01",
+      "location_name": "Off Trincomalee",
+      "lon": 81.42,
+      "lat": 8.66,
+      "detected_at": "2026-10-13T12:40:00Z",
+      "sensor": "Sentinel-1",
+      "area_km2": 2.1,
+      "confidence": 0.64,
+      "severity": "low",
+      "status": "resolved",
+      "polygon": [
+        [
+          81.42945,
+          8.64886
+        ],
+        [
+          81.42954,
+          8.65045
+        ],
+        [
+          81.42837,
+          8.65313
+        ],
+        [
+          81.42829,
+          8.65508
+        ],
+        [
+          81.42563,
+          8.65877
+        ],
+        [
+          81.42294,
+          8.66244
+        ],
+        [
+          81.41978,
+          8.66513
+        ],
+        [
+          81.41676,
+          8.66835
+        ],
+        [
+          81.41369,
+          8.67093
+        ],
+        [
+          81.41234,
+          8.67068
+        ],
+        [
+          81.4104,
+          8.67131
+        ],
+        [
+          81.40966,
+          8.67035
+        ],
+        [
+          81.40975,
+          8.66842
+        ],
+        [
+          81.41183,
+          8.66486
+        ],
+        [
+          81.41397,
+          8.66131
+        ],
+        [
+          81.41752,
+          8.65794
+        ],
+        [
+          81.42024,
+          8.65445
+        ],
+        [
+          81.42332,
+          8.65145
+        ],
+        [
+          81.42658,
+          8.6486
+        ],
+        [
+          81.42743,
+          8.64965
+        ],
+        [
+          81.42945,
+          8.64886
+        ]
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "vessel_id": "417000990",
+          "vessel_name": "Sea Falcon 7",
+          "score": 0.52,
+          "evidence": [
+            "Track overlap of 25 min with the slick",
+            "Speed drop to 3 kn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S1-20261005-01",
+      "location_name": "South of Hambantota port",
+      "lon": 81.12,
+      "lat": 5.98,
+      "detected_at": "2026-10-05T00:44:00Z",
+      "sensor": "Sentinel-1",
+      "area_km2": 4.5,
+      "confidence": 0.72,
+      "severity": "medium",
+      "status": "resolved",
+      "polygon": [
+        [
+          81.1397,
+          5.97655
+        ],
+        [
+          81.14091,
+          5.97805
+        ],
+        [
+          81.13533,
+          5.98008
+        ],
+        [
+          81.13426,
+          5.98224
+        ],
+        [
+          81.12666,
+          5.98346
+        ],
+        [
+          81.12104,
+          5.98589
+        ],
+        [
+          81.1137,
+          5.98686
+        ],
+        [
+          81.10688,
+          5.98723
+        ],
+        [
+          81.10465,
+          5.98565
+        ],
+        [
+          81.10081,
+          5.98499
+        ],
+        [
+          81.09824,
+          5.98382
+        ],
+        [
+          81.098,
+          5.98205
+        ],
+        [
+          81.10225,
+          5.97991
+        ],
+        [
+          81.10541,
+          5.97771
+        ],
+        [
+          81.11189,
+          5.97579
+        ],
+        [
+          81.11916,
+          5.97524
+        ],
+        [
+          81.12585,
+          5.97364
+        ],
+        [
+          81.13046,
+          5.97424
+        ],
+        [
+          81.13571,
+          5.97422
+        ],
+        [
+          81.13788,
+          5.97535
+        ],
+        [
+          81.1397,
+          5.97655
+        ]
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "vessel_id": "417222019",
+          "vessel_name": "Lanka Trader",
+          "score": 0.61,
+          "evidence": [
+            "Closest approach 0.9 km, 3 h before the image"
+          ]
+        },
+        {
+          "rank": 2,
+          "vessel_id": "405000318",
+          "vessel_name": "Bengal Pearl",
+          "score": 0.33,
+          "evidence": [
+            "Course within 20° of slick axis, 8 km away"
+          ]
+        }
+      ]
+    }
+  ]
+}

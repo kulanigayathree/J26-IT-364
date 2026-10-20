@@ -1,6 +1,5 @@
 # CODEOWNERS for J26-IT-364.
-# TODO: replace each @TODO-cX-owner with the member's real GitHub username, then turn on
-# "Require review from Code Owners" for main in the branch protection settings.
+# TODO: replace each @TODO-cX-owner with the member's real GitHub username.
 #
 #   C1  Pathirana K.G.T.K.S       -> @TODO-c1-owner
 #   C2  Gayathree M.G.K           -> @TODO-c2-owner
@@ -9,39 +8,45 @@
 #
 # Later rules override earlier ones, so the shared default comes first.
 
-# Shared by default: every member reviews.
-*                                               @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
-
-# Shared frontend structure (design system, UI kit, map kit, shell, registry): all members.
-/frontend/src/design/                           @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
-/frontend/src/components/                       @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
-/frontend/src/layout/                           @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
-/frontend/src/features/registry.ts              @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
+# Shared by default (app shell, shared components, auth, theme): all members review.
+*                                         @TODO-c1-owner @TODO-c2-owner @TODO-c3-owner @TODO-c4-owner
 
 # C1 Vessel behaviour anomaly detection
-/frontend/src/features/c1-vessel-anomaly/       @TODO-c1-owner
-/integration/api/app/routers/c1.py              @TODO-c1-owner
-/integration/api/app/schemas/c1.py              @TODO-c1-owner
-/integration/api/app/mock/c1/                   @TODO-c1-owner
-/models/C1_vessel_anomaly/                      @TODO-c1-owner
+/frontend/src/pages/c1/                   @TODO-c1-owner
+/frontend/src/api/c1.ts                   @TODO-c1-owner
+/frontend/src/types/c1.ts                 @TODO-c1-owner
+/integration/api/app/routers/c1.py        @TODO-c1-owner
+/integration/api/app/schemas/c1.py        @TODO-c1-owner
+/integration/api/app/adapters/c1.py       @TODO-c1-owner
+/integration/model_outputs/c1/            @TODO-c1-owner
+/models/C1_vessel_anomaly/                @TODO-c1-owner
 
 # C2 Fishing-zone prediction
-/frontend/src/features/c2-fishing-zone/         @TODO-c2-owner
-/integration/api/app/routers/c2.py              @TODO-c2-owner
-/integration/api/app/schemas/c2.py              @TODO-c2-owner
-/integration/api/app/mock/c2/                   @TODO-c2-owner
-/models/C2_fishing_zone/                        @TODO-c2-owner
+/frontend/src/pages/c2/                   @TODO-c2-owner
+/frontend/src/api/c2.ts                   @TODO-c2-owner
+/frontend/src/types/c2.ts                 @TODO-c2-owner
+/integration/api/app/routers/c2.py        @TODO-c2-owner
+/integration/api/app/schemas/c2.py        @TODO-c2-owner
+/integration/api/app/adapters/c2.py       @TODO-c2-owner
+/integration/model_outputs/c2/            @TODO-c2-owner
+/models/C2_fishing_zone/                  @TODO-c2-owner
 
 # C3 Reef health monitoring
-/frontend/src/features/c3-reef-health/          @TODO-c3-owner
-/integration/api/app/routers/c3.py              @TODO-c3-owner
-/integration/api/app/schemas/c3.py              @TODO-c3-owner
-/integration/api/app/mock/c3/                   @TODO-c3-owner
-/models/C3_reef_health/                         @TODO-c3-owner
+/frontend/src/pages/c3/                   @TODO-c3-owner
+/frontend/src/api/c3.ts                   @TODO-c3-owner
+/frontend/src/types/c3.ts                 @TODO-c3-owner
+/integration/api/app/routers/c3.py        @TODO-c3-owner
+/integration/api/app/schemas/c3.py        @TODO-c3-owner
+/integration/api/app/adapters/c3.py       @TODO-c3-owner
+/integration/model_outputs/c3/            @TODO-c3-owner
+/models/C3_reef_health/                   @TODO-c3-owner
 
 # C4 Oil-spill detection and attribution
-/frontend/src/features/c4-oil-spill/            @TODO-c4-owner
-/integration/api/app/routers/c4.py              @TODO-c4-owner
-/integration/api/app/schemas/c4.py              @TODO-c4-owner
-/integration/api/app/mock/c4/                   @TODO-c4-owner
-/models/C4_oil_spill/                           @TODO-c4-owner
+/frontend/src/pages/c4/                   @TODO-c4-owner
+/frontend/src/api/c4.ts                   @TODO-c4-owner
+/frontend/src/types/c4.ts                 @TODO-c4-owner
+/integration/api/app/routers/c4.py        @TODO-c4-owner
+/integration/api/app/schemas/c4.py        @TODO-c4-owner
+/integration/api/app/adapters/c4.py       @TODO-c4-owner
+/integration/model_outputs/c4/            @TODO-c4-owner
+/models/C4_oil_spill/                     @TODO-c4-owner

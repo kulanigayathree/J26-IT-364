@@ -1,64 +1,42 @@
-"""C4 – Oil-spill detection and vessel attribution. Mirrors frontend/src/features/c4-oil-spill/types.ts."""
-
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-from .common import Feature, FeatureCollection, LineString, Polygon, Severity, UtcDatetime
-
-SpillStatus = Literal["new", "under_review", "confirmed", "dismissed"]
-EvidenceKind = Literal["track_overlap", "proximity", "heading_alignment", "ais_gap", "speed_drop"]
+from app.schemas import ModelMeta, Severity
 
 
-class SpillProperties(BaseModel):
-    id: str
-    detected_at: UtcDatetime = Field(description="SAR acquisition time")
-    sensor: str
-    location_name: str
-    area_km2: float
-    confidence: float = Field(ge=0, le=1, description="Detector confidence")
-    severity: Severity
-    status: SpillStatus
-    candidate_count: int
+class Candidate(BaseModel):
+    """A candidate source vessel. Candidate, not proof."""
 
-
-class Evidence(BaseModel):
-    kind: EvidenceKind
-    label: str
-    value: str
-
-
-class CandidateVessel(BaseModel):
-    rank: int = Field(ge=1, description="1 = most likely candidate")
-    mmsi: str
-    vessel_name: str
-    vessel_type: str
-    flag: str
-    score: float = Field(ge=0, le=1, description="Ranking aid, not a probability of guilt")
-    evidence: list[Evidence]
-
-
-class CandidateTrackProperties(BaseModel):
-    mmsi: str
-    vessel_name: str
     rank: int
+    vessel_id: str
+    vessel_name: str
+    score: float
+    evidence: list[str]
 
 
-SpillFeature = Feature[Polygon, SpillProperties]
+class Spill(BaseModel):
+    id: str
+    location_name: str
+    lon: float
+    lat: float
+    detected_at: str
+    sensor: str
+    area_km2: float
+    confidence: float
+    severity: Severity
+    status: Literal["active", "resolved"]
+    polygon: list[list[float]]  # ring of [lon, lat]
+    candidates: list[Candidate]
 
 
-class SpillCollection(FeatureCollection[SpillFeature]):
-    """GET /api/c4/spills"""
+class C4Summary(BaseModel):
+    active: int
+    total: int
+    high_severity: int
+    candidate_vessels: int
 
 
-class CandidateTrackCollection(FeatureCollection[Feature[LineString, CandidateTrackProperties]]):
-    pass
-
-
-class SpillDetail(BaseModel):
-    """GET /api/c4/spills/{spill_id}. Candidates are candidates, not proof."""
-
-    spill: SpillFeature
-    candidates: list[CandidateVessel]
-    candidate_tracks: CandidateTrackCollection
-    attribution_method: str
+class C4Data(ModelMeta):
+    summary: C4Summary
+    spills: list[Spill]
