@@ -1,0 +1,48 @@
+# C1 - Vessel Behaviour Anomaly Detection: configuration
+# Edit `columns` so the VALUES match the real column names in YOUR csv.
+# (Run:  python run_c1.py --csv data/raw/marinecadastre_2025.csv --inspect   to see them)
+
+columns:            # standard_name: name_in_your_csv   (upper/lower case does not matter)
+  mmsi: mmsi
+  time: timestamp           # unix seconds are fine (your trawlers.csv)
+  lat:  lat                 # if coordinates are in ONE column like "POINT (-90.1 28.3)":
+  lon:  lon                 #   set lat: null, lon: null and  geometry: geometry
+  sog:  speed
+  cog:  course
+  geometry: null
+
+data:
+  nrows: null               # e.g. 200000 to read only the first rows while testing
+  max_vessels: 60       # keep the first N vessels in the file (keeps training fast); null = all
+  max_gap_hours: 6          # a gap longer than this splits a vessel's data into separate tracks
+  min_track_pings: 40       # drop very short tracks
+  vessel_type_column: null  # e.g. VesselType (name of the vessel-type column in your csv)
+  vessel_types: null        # e.g. [30, 31, 32, 33] (AIS fishing codes); null = keep all vessels
+
+windows:
+  size: 10                  # pings per window (proposal: N = 10)
+  stride: 3
+
+split:                      # split is done BY VESSEL (MMSI), never by row -> no leakage
+  train: 0.70
+  val: 0.15
+  test: 0.15
+  seed: 42
+
+injection:                  # synthetic anomalies (proposal section 3.2) put only into val/test vessels
+  frac_tracks: 0.5          # fraction of val/test tracks that receive injected events
+  types: [spoof, gap, slowdown, zigzag]
+
+model:
+  hidden: 64
+  latent: 32
+  epochs: 12
+  max_train_windows: 150000   # random subsample of training windows (keeps CPU training short)
+  batch_size: 256
+  lr: 0.001
+  patience: 5
+  score_ref_quantile: 0.95  # recon error at this quantile of clean data maps to anomaly score 0.5
+
+evaluation:
+  far_max: 0.05             # proposal target: False Alarm Rate < 5%
+  gap_trigger_s: 1200       # transmission-gap analyzer: silence longer than 20 min (proposal FR5)
