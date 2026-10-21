@@ -263,8 +263,9 @@ with tab_model:
     if os.path.exists(path):
         res = pd.read_csv(path)
         st.subheader("Model comparison (spatial 5-fold CV, ~500 m blocks)")
-        st.dataframe(res.round(3), hide_index=True, width="stretch")
-        st.bar_chart(res.set_index("model")[["accuracy", "macro_f1", "kappa"]])
+        res = res.drop(columns=["cv_time_s"], errors="ignore")
+        st.dataframe(res.style.format(precision=3, na_rep="–"), hide_index=True, width="stretch")
+        st.bar_chart(res.set_index("model")[["accuracy", "macro_f1", "kappa"]], stack=False)
         st.caption(f"Selected model (highest macro-F1): **{res.iloc[0]['model']}**")
     else:
         st.info("results/model_comparison.csv not found.")
@@ -273,10 +274,12 @@ with tab_model:
     if os.path.exists(abl):
         st.subheader("Experiments (macro-F1)")
         a = pd.read_csv(abl)
-        st.dataframe(a.pivot(index="model", columns="feature_set", values="macro_f1").round(3),
+        piv = a.pivot(index="model", columns="feature_set", values="macro_f1")
+        st.dataframe(piv.apply(lambda col: col.map(lambda v: "–" if pd.isna(v) else f"{v:.3f}")),
                      width="stretch")
         st.caption("E0 = Day 2 baseline (v1 composite) · E1 = cleaner v2 composite · "
-                   "E2 = + label purity filter · E3 = + neighbourhood (context) features")
+                   "E2 = + label purity filter · E3 = + neighbourhood (context) features · "
+                   "E4 = context features without purity filter · SVM_tuned = SVM with tuned C/gamma (E3 only)")
 
     imgs = [p for p in ["improvement_macro_f1.png", "confusion_matrix.png", "ablation_macro_f1.png"]
             if os.path.exists(os.path.join(RESULTS_DIR, p))]
