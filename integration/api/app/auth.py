@@ -23,7 +23,7 @@ pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 bearer = HTTPBearer(auto_error=False)
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
-Role = Literal["agency", "fisher"]
+Role = Literal["agency", "researcher", "fisheries_officer", "conservation", "fisher", "other"]
 
 
 class RegisterIn(BaseModel):

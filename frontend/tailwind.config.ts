@@ -7,9 +7,10 @@ export default {
     // Only the project colours from theme.ts (Tailwind's default palette is switched off).
     colors: { transparent: 'transparent', current: 'currentColor', ...colors },
     fontFamily: fonts,
-    borderRadius: { none: '0', DEFAULT: '4px', full: '9999px' },
-    boxShadow: { none: 'none', DEFAULT: '0 1px 2px rgba(15, 36, 51, 0.10)' },
-    extend: {},
+    extend: {
+      maxWidth: { page: '1240px' },
+      transitionTimingFunction: { soft: 'cubic-bezier(0.23, 1, 0.32, 1)' },
+    },
   },
   plugins: [],
 } satisfies Config;

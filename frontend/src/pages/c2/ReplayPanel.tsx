@@ -1,20 +1,13 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { History } from 'lucide-react';
-import { CircleMarker } from 'react-leaflet';
 import { getC2Replay, getC2ReplayStatus } from '../../api/c2';
 import { useApi } from '../../api/client';
-import { Button } from '../../components/Button';
-import { ErrorMessage } from '../../components/ErrorMessage';
-import { inputClass } from '../../components/FormField';
-import { Loading } from '../../components/Loading';
-import { MapLegend } from '../../components/MapLegend';
-import { MapView } from '../../components/MapView';
-import { StatCard } from '../../components/StatCard';
+import { SeaMap } from '../../components/SeaMap';
+import { ErrorMessage, Field, Loading, Notice, Panel, Segmented, StatRow, actionBtn, inputCls } from '../../components/ui';
 import { formatDate } from '../../format';
-import { colors } from '../../theme';
 import type { ReplayResult } from '../../types/c2';
-import { GridLayer } from './GridLayer';
-import { ChoiceButtons, STEPS } from './shared';
+import { GridCells, STEPS, Swatch, gridBounds } from './grid';
 
 type Show = 'forecast' | 'uncertainty' | 'actual' | 'compare';
 
@@ -47,62 +40,52 @@ export function ReplayPanel() {
   };
 
   return (
-    <section className="rounded border border-line bg-paper p-4 md:p-6">
-      <div className="flex flex-wrap items-center gap-2">
-        <History aria-hidden className="h-6 w-6 text-coral" />
-        <h2 className="text-xl">Try the model: compare a forecast with what really happened</h2>
-      </div>
-      <p className="mt-1 max-w-3xl font-serif text-muted">
-        Pick a day in the 2025 test period (never used for training). You see the C2 model's 3-day forecast for that day,
-        its uncertainty, and the fishing activity that actually happened (Global Fishing Watch).
+    <Panel title="Try the model: compare a forecast with what really happened" icon={<History className="size-5 text-coral" strokeWidth={1.75} />}>
+      <p className="max-w-[720px] text-[14.5px] leading-[1.65] text-muted">
+        Pick a day in the 2025 test period (never used for training). You see the C2 model’s 3-day forecast for that day, its
+        uncertainty, and the fishing activity that actually happened (Global Fishing Watch).
       </p>
 
       {status.loading && <Loading text="Checking the C2 model results…" />}
-      {status.error && <p className="mt-3 text-sm text-coral-text">{status.error}</p>}
-      {s && !s.available && (
-        <p className="mt-3 rounded border border-l-4 border-line border-l-amber bg-paper-2 px-3 py-2 text-sm">{s.message}</p>
-      )}
+      {status.error && <div className="mt-4"><ErrorMessage message={status.error} onRetry={status.reload} /></div>}
+      {s && !s.available && <div className="mt-4"><Notice>{s.message}</Notice></div>}
 
       {s?.available && (
         <>
-          <p className="mt-3 text-sm text-muted">
+          <p className="mt-2 font-mono text-[11.5px] text-muted">
             Saved test forecasts from the C2 notebooks (calibrated, MC dropout).{s.best_model ? ` Best model: ${s.best_model}.` : ''}
           </p>
-          <div className="mt-4 grid gap-4 md:grid-cols-3 md:items-end">
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Forecast day 1
+          <div className="mt-5 grid gap-4 md:grid-cols-[1fr_1fr_auto] md:items-end">
+            <Field label="Forecast day 1">
               <input
                 type="date"
                 value={chosenDate}
                 min={s.first_date ?? undefined}
                 max={s.last_date ?? undefined}
                 onChange={(e) => setDate(e.target.value)}
-                className={`${inputClass} font-normal`}
+                className={inputCls}
               />
-            </label>
-            <label className="flex flex-col gap-1 text-sm font-bold">
-              Model
-              <select value={chosenModel} onChange={(e) => setModel(e.target.value)} className={`${inputClass} font-normal`}>
+            </Field>
+            <Field label="Model">
+              <select value={chosenModel} onChange={(e) => setModel(e.target.value)} className={inputCls}>
                 {s.models.map((m) => (
                   <option key={m.key} value={m.key}>
                     {m.label}
                   </option>
                 ))}
               </select>
-            </label>
-            <Button size="lg" onClick={run} disabled={!chosenDate || busy}>
-              <History aria-hidden className="h-5 w-5" />
+            </Field>
+            <button type="button" onClick={run} disabled={!chosenDate || busy} className={actionBtn}>
+              <History className="size-4" strokeWidth={1.75} />
               {busy ? 'Loading…' : 'Show forecast'}
-            </Button>
+            </button>
           </div>
         </>
       )}
 
-      <div className="mt-6">
-        {error && <ErrorMessage message={error} onRetry={run} />}
-        {result && <Result result={result} lead={lead} setLead={setLead} show={show} setShow={setShow} />}
-      </div>
-    </section>
+      {error && <div className="mt-5"><ErrorMessage message={error} onRetry={run} /></div>}
+      {result && <Result result={result} lead={lead} setLead={setLead} show={show} setShow={setShow} />}
+    </Panel>
   );
 }
 
@@ -125,77 +108,85 @@ function Result({
     { value: 'compare', label: 'Forecast vs actual' },
     { value: 'forecast', label: 'Forecast' },
     ...(day.uncertainty ? [{ value: 'uncertainty' as const, label: 'Uncertainty' }] : []),
-    { value: 'actual', label: 'Actual fishing' },
+    { value: 'actual', label: 'Actual' },
   ];
   const grid = { lat: result.lat, lon: result.lon, cellSize: result.cell_size };
+  const half = result.cell_size / 2;
 
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-sm text-muted">
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+      className="mt-6 space-y-6 border-t border-line pt-6"
+    >
+      <p className="font-mono text-[11.5px] text-muted">
         {result.model_label} · input data up to {formatDate(result.issued_after)} · loaded in {result.runtime_ms} ms
       </p>
-      <div className="grid gap-4 md:grid-cols-2">
-        <ChoiceButtons
+      <div className="grid gap-5 md:grid-cols-2">
+        <Segmented
           label="Forecast day"
           value={lead}
           onChange={setLead}
           options={result.leads.map((l) => ({ value: l.lead, label: `Day ${l.lead} · ${formatDate(l.date).replace(/ \d{4}$/, '')}` }))}
         />
-        <ChoiceButtons label="Show on map" value={show} onChange={setShow} options={options} />
+        <Segmented label="Show on map" value={show} onChange={setShow} options={options} />
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <StatCard label="Real fishing cells" value={m.fishing_cells} note={`of ${m.sea_cells} sea cells`} />
-        <StatCard label="Found in top 10%" value={m.top10_capture === null ? '—' : `${Math.round(m.top10_capture * 100)}%`} note="of real fishing, in the 10% highest-forecast cells" />
-        <StatCard label="ROC-AUC" value={m.roc_auc ?? '—'} note="0.5 = random, 1 = perfect" />
-        <StatCard label="PR-AUC" value={m.pr_auc ?? '—'} note="main score (fishing is rare)" />
-      </div>
-
-      <MapView label={`C2 forecast for ${day.date}`} height="lg">
-        {(show === 'forecast' || show === 'compare') && (
-          <GridLayer {...grid} values={day.probability} color={STEPS.probability.color} limits={STEPS.probability.limits} />
-        )}
-        {show === 'uncertainty' && day.uncertainty && (
-          <GridLayer {...grid} values={day.uncertainty} color={STEPS.uncertainty.color} limits={STEPS.uncertainty.limits} />
-        )}
-        {show === 'actual' && <GridLayer {...grid} values={day.actual} color={colors.navy} limits={[0.5, 2, 3]} hideBelow={0.5} />}
-        {show === 'compare' && <ActualDots lat={result.lat} lon={result.lon} actual={day.actual} />}
-      </MapView>
-      <MapLegend
+      <StatRow
         items={[
-          ...(show === 'forecast' || show === 'compare'
-            ? STEPS.probability.labels.map((label, i) => ({ label: `Forecast ${label}`, swatch: STEPS.probability.swatches[i] }))
-            : []),
-          ...(show === 'uncertainty' ? STEPS.uncertainty.labels.map((label, i) => ({ label, swatch: STEPS.uncertainty.swatches[i] })) : []),
-          ...(show === 'actual' || show === 'compare' ? [{ label: 'Real fishing that day', swatch: 'border-navy bg-navy' }] : []),
+          { label: 'Real fishing cells', value: m.fishing_cells, note: `of ${m.sea_cells} sea cells` },
+          { label: 'Found in top 10%', value: m.top10_capture === null ? '—' : `${Math.round(m.top10_capture * 100)}%`, note: 'of real fishing' },
+          { label: 'ROC-AUC', value: m.roc_auc ?? '—', note: '0.5 = random, 1 = perfect' },
+          { label: 'PR-AUC', value: m.pr_auc ?? '—', note: 'main score (fishing is rare)' },
         ]}
       />
-      <p className="text-sm text-muted">
-        Model output – not field-confirmed. Real fishing = cells with fishing activity detected by Global Fishing Watch on that day.
-      </p>
-    </div>
-  );
-}
 
-/** Small navy dots on cells where fishing really happened (drawn over the forecast). */
-function ActualDots({ lat, lon, actual }: { lat: number[]; lon: number[]; actual: (number | null)[][] }) {
-  const dots = [];
-  for (let i = 0; i < lat.length; i++) {
-    for (let j = 0; j < lon.length; j++) {
-      if ((actual[i]?.[j] ?? 0) >= 0.5) dots.push([lat[i], lon[j]] as [number, number]);
-    }
-  }
-  return (
-    <>
-      {dots.map(([la, lo]) => (
-        <CircleMarker
-          key={`${la}-${lo}`}
-          center={[la, lo]}
-          radius={3}
-          interactive={false}
-          pathOptions={{ color: colors.navy, fillColor: colors.navy, fillOpacity: 1, weight: 1 }}
-        />
-      ))}
-    </>
+      <figure>
+        <div className="overflow-hidden rounded-[4px] border border-line">
+          <SeaMap
+            bounds={gridBounds(result.lat, result.lon, result.cell_size)}
+            label={`C2 forecast for ${formatDate(day.date)}`}
+            under={(P) => (
+              <>
+                {(show === 'forecast' || show === 'compare') && (
+                  <GridCells P={P} {...grid} values={day.probability} fills={STEPS.probability.fills} limits={STEPS.probability.limits} />
+                )}
+                {show === 'uncertainty' && day.uncertainty && (
+                  <GridCells P={P} {...grid} values={day.uncertainty} fills={STEPS.uncertainty.fills} limits={STEPS.uncertainty.limits} />
+                )}
+                {show === 'actual' && <GridCells P={P} {...grid} values={day.actual} fills={['#0b2d40']} limits={[]} hideBelow={0.5} />}
+              </>
+            )}
+            over={(P) =>
+              show === 'compare' ? (
+                <g fill="#0b2d40">
+                  {result.lat.flatMap((la, i) =>
+                    result.lon.map((lo, j) => {
+                      if ((day.actual[i]?.[j] ?? 0) < 0.5) return null;
+                      const [x, y] = P.project([lo, la]);
+                      return <circle key={`${i}-${j}`} cx={x} cy={y} r={Math.max(2, Math.min(4, half * P.scale * 0.35))} />;
+                    }),
+                  )}
+                </g>
+              ) : null
+            }
+          />
+        </div>
+        <figcaption className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-[12.5px] text-muted">
+          {(show === 'forecast' || show === 'compare') &&
+            STEPS.probability.labels.map((label, i) => <Swatch key={label} swatch={STEPS.probability.swatches[i]} label={`Forecast ${label}`} />)}
+          {show === 'uncertainty' && STEPS.uncertainty.labels.map((label, i) => <Swatch key={label} swatch={STEPS.uncertainty.swatches[i]} label={label} />)}
+          {show === 'actual' && <Swatch swatch="bg-deep" label="Real fishing that day" />}
+          {show === 'compare' && (
+            <span className="flex items-center gap-2">
+              <span className="size-2.5 rounded-full bg-deep" />
+              Real fishing that day
+            </span>
+          )}
+        </figcaption>
+      </figure>
+      <p className="text-[12.5px] leading-[1.6] text-muted">Real fishing = cells with fishing activity detected by Global Fishing Watch on that day.</p>
+    </motion.div>
   );
 }

@@ -1,9 +1,18 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { api, getToken, LOGGED_OUT_EVENT, setToken } from '../api/client';
-import { Loading } from '../components/Loading';
+import { Loading } from '../components/ui';
 
-export type Role = 'agency' | 'fisher';
+export type Role = 'agency' | 'researcher' | 'fisheries_officer' | 'conservation' | 'fisher' | 'other';
+
+export const ROLE_LABELS: Record<Role, string> = {
+  agency: 'Marine agency',
+  researcher: 'Researcher',
+  fisheries_officer: 'Fisheries officer',
+  conservation: 'Conservation team',
+  fisher: 'Fisher',
+  other: 'Other',
+};
 
 export interface User {
   id: number;

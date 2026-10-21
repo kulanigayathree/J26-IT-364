@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react';
+import { td, th } from './ui';
 
 export interface Column<T> {
   header: string;
   cell: (row: T) => ReactNode;
   /** right-align numbers */
   numeric?: boolean;
+  /** monospace (IDs, coordinates, scores) */
+  mono?: boolean;
 }
 
 interface Props<T> {
@@ -14,20 +17,22 @@ interface Props<T> {
   onRowClick?: (row: T) => void;
   selectedKey?: string | null;
   caption?: string;
+  /** table min width before it scrolls sideways (tablet) */
+  minWidth?: string;
 }
 
-/** Ruled table on tablet/desktop; a list of cards on phones. */
-export function DataTable<T>({ columns, rows, rowKey, onRowClick, selectedKey, caption }: Props<T>) {
+/** Ruled table (tablet/desktop); a list of cards on phones. */
+export function DataTable<T>({ columns, rows, rowKey, onRowClick, selectedKey, caption, minWidth = 'min-w-[640px]' }: Props<T>) {
   const clickable = Boolean(onRowClick);
   return (
     <div>
-      <div className="hidden overflow-x-auto rounded border border-line md:block">
-        <table className="w-full border-collapse bg-paper text-sm">
+      <div className="hidden overflow-x-auto rounded-[4px] border border-line bg-white md:block">
+        <table className={`w-full border-collapse ${minWidth}`}>
           {caption && <caption className="sr-only">{caption}</caption>}
-          <thead className="bg-paper-2 text-left text-xs uppercase tracking-wide text-muted">
+          <thead className="border-b border-line bg-sand/50">
             <tr>
               {columns.map((c) => (
-                <th key={c.header} scope="col" className={`border-b border-line px-3 py-2 ${c.numeric ? 'text-right' : ''}`}>
+                <th key={c.header} scope="col" className={`${th} ${c.numeric ? 'text-right' : ''}`}>
                   {c.header}
                 </th>
               ))}
@@ -44,10 +49,15 @@ export function DataTable<T>({ columns, rows, rowKey, onRowClick, selectedKey, c
                   onKeyDown={clickable ? (e) => e.key === 'Enter' && onRowClick!(row) : undefined}
                   tabIndex={clickable ? 0 : undefined}
                   aria-selected={clickable ? selected : undefined}
-                  className={`border-b border-line last:border-b-0 ${clickable ? 'cursor-pointer hover:bg-paper-2' : ''} ${selected ? 'bg-paper-2 font-bold' : ''}`}
+                  className={`border-b border-line align-top last:border-0 transition-colors duration-150 ${clickable ? 'cursor-pointer' : ''} ${
+                    selected ? 'bg-shallow/20' : clickable ? 'hover:bg-sand/40' : ''
+                  }`}
                 >
-                  {columns.map((c) => (
-                    <td key={c.header} className={`px-3 py-2 align-top ${c.numeric ? 'text-right tabular-nums' : ''}`}>
+                  {columns.map((c, i) => (
+                    <td
+                      key={c.header}
+                      className={`${td} ${c.numeric ? 'text-right' : ''} ${c.mono ? 'font-mono text-[12.5px]' : ''} ${selected && i === 0 ? 'font-medium' : ''}`}
+                    >
                       {c.cell(row)}
                     </td>
                   ))}
@@ -63,20 +73,17 @@ export function DataTable<T>({ columns, rows, rowKey, onRowClick, selectedKey, c
           const key = rowKey(row);
           const selected = key === selectedKey;
           const content = (
-            <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5">
               {columns.map((c) => (
                 <div key={c.header} className="min-w-0">
-                  <dt className="text-xs text-muted">{c.header}</dt>
-                  <dd className="break-words">{c.cell(row)}</dd>
+                  <dt className="font-mono text-[10.5px] text-muted">{c.header}</dt>
+                  <dd className={`break-words text-[13.5px] text-ink/85 ${c.mono ? 'font-mono text-[12.5px]' : ''}`}>{c.cell(row)}</dd>
                 </div>
               ))}
             </dl>
           );
           return (
-            <li
-              key={key}
-              className={`rounded border bg-paper ${selected ? 'border-l-4 border-navy' : 'border-line'}`}
-            >
+            <li key={key} className={`rounded-[4px] border bg-white ${selected ? 'border-deep' : 'border-line'}`}>
               {clickable ? (
                 <button type="button" onClick={() => onRowClick!(row)} className="block w-full p-4 text-left">
                   {content}

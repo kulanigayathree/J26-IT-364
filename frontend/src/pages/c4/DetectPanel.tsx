@@ -1,34 +1,32 @@
-import { useState, type ChangeEvent } from 'react';
-import { ImageUp, ScanSearch } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ImagePlus, ScanSearch, X } from 'lucide-react';
 import { detectSpill, getC4DetectStatus } from '../../api/c4';
 import { useApi } from '../../api/client';
-import { Button } from '../../components/Button';
 import { DataTable } from '../../components/DataTable';
-import { ErrorMessage } from '../../components/ErrorMessage';
-import { Loading } from '../../components/Loading';
-import { Tag } from '../../components/SeverityBadge';
-import { StatCard } from '../../components/StatCard';
-import { colors } from '../../theme';
+import { Legend } from '../../components/ModelPage';
+import { ErrorMessage, Loading, Notice, Panel, Segmented, StatRow, Tag, actionBtn } from '../../components/ui';
 import type { DetectedPatch, DetectResult } from '../../types/c4';
 
 type Step = 'original' | 'filtered' | 'mask' | 'result';
 
-const STEPS: { id: Step; label: string; help: string }[] = [
-  { id: 'original', label: '1. Original', help: 'The uploaded SAR image (grayscale).' },
-  { id: 'filtered', label: '2. Speckle filter', help: 'Median filter removes radar speckle noise.' },
-  { id: 'mask', label: '3. Dark spots', help: 'Pixels much darker than the surrounding sea, cleaned into patches.' },
-  { id: 'result', label: '4. Result', help: 'Each patch classified by the C4 model as oil or look-alike.' },
+const STEPS: { value: Step; label: string; help: string }[] = [
+  { value: 'original', label: '1. Original', help: 'The uploaded SAR image (grayscale).' },
+  { value: 'filtered', label: '2. Speckle filter', help: 'Median filter removes radar speckle noise.' },
+  { value: 'mask', label: '3. Dark spots', help: 'Pixels much darker than the surrounding sea, cleaned into patches.' },
+  { value: 'result', label: '4. Result', help: 'Each patch classified by the C4 model as oil or look-alike.' },
 ];
 
 const VERDICT = {
-  oil: { label: 'Oil', tone: 'bad' as const, color: colors['coral-text'] },
-  'look-alike': { label: 'Look-alike', tone: 'info' as const, color: colors.sea },
-  'dark spot': { label: 'Dark spot', tone: 'warn' as const, color: colors.amber },
+  oil: { label: 'Oil', tone: 'bad' as const, color: '#d0603f', swatch: 'bg-coral' },
+  'look-alike': { label: 'Look-alike', tone: 'info' as const, color: '#8cc9c1', swatch: 'bg-shallow' },
+  'dark spot': { label: 'Dark spot', tone: 'warn' as const, color: '#c08a2b', swatch: 'bg-amber' },
 };
 
 /** "Try the model": upload a SAR image, run the C4 pipeline, show each step and the result. */
 export function DetectPanel() {
   const status = useApi(getC4DetectStatus, []);
+  const input = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [isCoast, setIsCoast] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -37,10 +35,11 @@ export function DetectPanel() {
   const [step, setStep] = useState<Step>('result');
   const [selected, setSelected] = useState<number | null>(null);
 
-  const onFile = (e: ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files?.[0] ?? null);
+  const choose = (f: File | null) => {
+    setFile(f);
     setResult(null);
     setError(null);
+    if (!f && input.current) input.current.value = '';
   };
 
   const run = async () => {
@@ -62,52 +61,65 @@ export function DetectPanel() {
   const classified = result?.classifier.available ?? status.data?.available ?? false;
 
   return (
-    <section className="rounded border border-line bg-paper p-4 md:p-6">
-      <div className="flex flex-wrap items-center gap-2">
-        <ScanSearch aria-hidden className="h-6 w-6 text-coral" />
-        <h2 className="text-xl">Try the model: detect oil in a SAR image</h2>
-      </div>
-      <p className="mt-1 max-w-3xl font-serif text-muted">
-        Upload a Sentinel-1 SAR image. The C4 model filters radar noise, finds dark spots, measures 19 shape
-        and darkness features for each one, and classifies it as oil or a look-alike (e.g. low wind).
+    <Panel title="Try the model: detect oil in a SAR image" icon={<ScanSearch className="size-5 text-coral" strokeWidth={1.75} />}>
+      <p className="max-w-[760px] text-[14.5px] leading-[1.65] text-muted">
+        Upload a Sentinel-1 SAR image. The C4 model filters radar noise, finds dark spots, measures 19 shape and darkness features for
+        each one, and classifies it as oil or a look-alike (e.g. low wind).
       </p>
-
-      {status.data && !status.data.available && (
-        <p className="mt-3 rounded border border-l-4 border-line border-l-amber bg-paper-2 px-3 py-2 text-sm">
-          {status.data.message} Steps 1–3 still run; put the trained C4 model (.joblib) in{' '}
-          <code>data/external/c4/</code> to classify oil vs look-alike.
-        </p>
-      )}
       {status.data?.available && (
-        <p className="mt-3 text-sm text-muted">
+        <p className="mt-2 font-mono text-[11.5px] text-muted">
           Model: {status.data.name} · oil threshold {status.data.threshold}
         </p>
       )}
+      {status.data && !status.data.available && (
+        <div className="mt-4">
+          <Notice>
+            {status.data.message} Steps 1–3 still run; put the trained C4 model (.joblib) in{' '}
+            <code className="font-mono text-[12px]">data/external/c4/</code> to classify oil vs look-alike.
+          </Notice>
+        </div>
+      )}
 
-      <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-end">
-        <label className="flex flex-1 cursor-pointer items-center gap-3 rounded border border-dashed border-muted bg-paper-2 px-4 py-3 hover:border-navy">
-          <ImageUp aria-hidden className="h-6 w-6 shrink-0 text-navy" />
-          <span className="min-w-0 truncate">
+      <div className="mt-5 flex flex-col gap-3 md:flex-row md:items-center">
+        <div
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            choose(e.dataTransfer.files?.[0] ?? null);
+          }}
+          className="flex h-12 min-w-0 flex-1 items-center gap-3 rounded-[4px] border border-dashed border-ink/30 bg-sand/40 px-4"
+        >
+          <ImagePlus className="size-5 shrink-0 text-muted" strokeWidth={1.5} />
+          <button type="button" onClick={() => input.current?.click()} className="min-w-0 flex-1 truncate text-left text-[14px] text-ink/80 hover:text-ink">
             {file ? file.name : 'Choose a SAR image (PNG, JPG or GeoTIFF)'}
-          </span>
-          <input type="file" accept=".png,.jpg,.jpeg,.tif,.tiff,image/*" onChange={onFile} className="sr-only" />
-        </label>
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={isCoast} onChange={(e) => setIsCoast(e.target.checked)} className="h-5 w-5" />
+          </button>
+          {file && (
+            <button type="button" aria-label="Remove image" onClick={() => choose(null)} className="text-muted hover:text-ink">
+              <X className="size-4" strokeWidth={1.75} />
+            </button>
+          )}
+          <input
+            ref={input}
+            type="file"
+            accept=".png,.jpg,.jpeg,.tif,.tiff,image/*"
+            className="hidden"
+            onChange={(e) => choose(e.target.files?.[0] ?? null)}
+          />
+        </div>
+        <label className="flex items-center gap-2 text-[13.5px] whitespace-nowrap text-ink/80">
+          <input type="checkbox" checked={isCoast} onChange={(e) => setIsCoast(e.target.checked)} className="size-4 accent-tide" />
           Image includes coastline
         </label>
-        <Button size="lg" onClick={run} disabled={!file || busy}>
-          <ScanSearch aria-hidden className="h-5 w-5" />
+        <button type="button" onClick={run} disabled={!file || busy} className={`${actionBtn} h-12`}>
+          <ScanSearch className="size-4" strokeWidth={1.75} />
           {busy ? 'Detecting…' : 'Detect'}
-        </Button>
+        </button>
       </div>
 
-      <div className="mt-6">
-        {busy && <Loading text="Running the C4 model…" />}
-        {error && <ErrorMessage message={error} onRetry={run} />}
-        {result && <Result result={result} classified={classified} step={step} setStep={setStep} selected={selected} setSelected={setSelected} />}
-      </div>
-    </section>
+      {busy && <Loading text="Running the C4 model…" />}
+      {error && <div className="mt-5"><ErrorMessage message={error} onRetry={run} /></div>}
+      {result && <Result result={result} classified={classified} step={step} setStep={setStep} selected={selected} setSelected={setSelected} />}
+    </Panel>
   );
 }
 
@@ -130,67 +142,61 @@ function Result({
   const lookAlikes = result.patches.filter((p) => p.verdict === 'look-alike').length;
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <StatCard label="Dark patches" value={result.n_patches} />
-        <StatCard label="Oil" value={classified ? result.n_oil : '—'} note={classified ? undefined : 'no model file'} />
-        <StatCard label="Look-alikes" value={classified ? lookAlikes : '—'} />
-        <StatCard label="Run time" value={`${result.runtime_ms} ms`} note={`${result.width} × ${result.height} px`} />
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+      className="mt-6 space-y-6 border-t border-line pt-6"
+    >
+      <StatRow
+        items={[
+          { label: 'Dark patches', value: result.n_patches },
+          { label: 'Oil', value: classified ? result.n_oil : '—', note: classified ? undefined : 'no model file' },
+          { label: 'Look-alikes', value: classified ? lookAlikes : '—' },
+          { label: 'Run time', value: `${result.runtime_ms} ms`, note: `${result.width} × ${result.height} px` },
+        ]}
+      />
+
+      <div>
+        <Segmented label="Processing step" value={step} onChange={setStep} options={STEPS} />
+        <p className="mt-2 text-[13px] text-muted">{STEPS.find((s) => s.value === step)?.help}</p>
       </div>
 
-      <div role="tablist" aria-label="Processing steps" className="flex flex-wrap gap-2">
-        {STEPS.map((s) => (
-          <button
-            key={s.id}
-            role="tab"
-            type="button"
-            aria-selected={step === s.id}
-            onClick={() => setStep(s.id)}
-            className={`h-10 rounded border px-3 text-sm font-bold ${step === s.id ? 'border-navy bg-navy text-paper' : 'border-line bg-paper text-navy hover:bg-paper-2'}`}
-          >
-            {s.label}
-          </button>
-        ))}
-      </div>
-      <p className="text-sm text-muted">{STEPS.find((s) => s.id === step)?.help}</p>
-
-      <div className="relative overflow-hidden rounded border border-line bg-ink">
-        <img src={image} alt={`SAR image, step: ${step}`} className="block h-auto w-full" />
+      <figure>
+        <div className="relative overflow-hidden rounded-[3px] border border-line bg-abyss">
+          <img src={image} alt={`SAR image, step: ${step}`} className="block h-auto w-full" />
+          {step === 'result' && (
+            <svg viewBox={`0 0 ${result.width} ${result.height}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+              {result.patches.map((p) => {
+                const v = VERDICT[p.verdict];
+                const isSel = p.id === selected;
+                return (
+                  <g key={p.id} onClick={() => setSelected(p.id)} className="cursor-pointer">
+                    <polygon
+                      points={p.outline.map(([x, y]) => `${x},${y}`).join(' ')}
+                      fill={v.color}
+                      fillOpacity={isSel ? 0.45 : 0.25}
+                      stroke={isSel ? '#f7f4ee' : v.color}
+                      strokeWidth={isSel ? 4 : 2.5}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+          )}
+        </div>
         {step === 'result' && (
-          <svg viewBox={`0 0 ${result.width} ${result.height}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-            {result.patches.map((p) => {
-              const v = VERDICT[p.verdict];
-              const isSel = p.id === selected;
-              return (
-                <g key={p.id} onClick={() => setSelected(p.id)} className="cursor-pointer">
-                  <polygon
-                    points={p.outline.map(([x, y]) => `${x},${y}`).join(' ')}
-                    fill={v.color}
-                    fillOpacity={isSel ? 0.45 : 0.25}
-                    stroke={isSel ? colors.paper : v.color}
-                    strokeWidth={isSel ? 4 : 2.5}
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </g>
-              );
-            })}
-          </svg>
+          <figcaption className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-[12.5px] text-muted">
+            {(classified ? (['oil', 'look-alike'] as const) : (['dark spot'] as const)).map((k) => (
+              <Legend key={k} swatch={VERDICT[k].swatch} label={VERDICT[k].label} />
+            ))}
+          </figcaption>
         )}
-      </div>
-
-      {step === 'result' && (
-        <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-          {(classified ? (['oil', 'look-alike'] as const) : (['dark spot'] as const)).map((k) => (
-            <li key={k} className="flex items-center gap-2">
-              <span aria-hidden className={`inline-block h-3 w-3 rounded-full border ${k === 'oil' ? 'border-coral-text bg-coral-text' : k === 'look-alike' ? 'border-sea bg-sea' : 'border-amber bg-amber'}`} />
-              {VERDICT[k].label}
-            </li>
-          ))}
-        </ul>
-      )}
+      </figure>
 
       {result.patches.length === 0 ? (
-        <p className="rounded border border-line bg-paper-2 p-4">No dark spots found in this image.</p>
+        <p className="border-t border-line pt-4 text-[14px] text-muted">No dark spots found in this image.</p>
       ) : (
         <DataTable<DetectedPatch>
           caption="Detected patches"
@@ -202,16 +208,16 @@ function Result({
             setStep('result');
           }}
           columns={[
-            { header: 'Patch', cell: (p) => `#${p.id}` },
+            { header: 'Patch', cell: (p) => `#${p.id}`, mono: true },
             { header: 'Verdict', cell: (p) => <Tag tone={VERDICT[p.verdict].tone}>{VERDICT[p.verdict].label}</Tag> },
             { header: 'Oil probability', cell: (p) => (p.probability === null ? '—' : `${Math.round(p.probability * 100)}%`), numeric: true },
             { header: 'Area', cell: (p) => `${p.area_px.toLocaleString()} px`, numeric: true },
-            { header: 'Elongation', cell: (p) => p.elongation.toFixed(1), numeric: true },
-            { header: 'Contrast', cell: (p) => p.contrast.toFixed(2), numeric: true },
+            { header: 'Elongation', cell: (p) => p.elongation.toFixed(1), numeric: true, mono: true },
+            { header: 'Contrast', cell: (p) => p.contrast.toFixed(2), numeric: true, mono: true },
           ]}
         />
       )}
-      <p className="text-sm text-muted">Model output – not field-confirmed. A detected slick must be verified before any action.</p>
-    </div>
+      <p className="text-[12.5px] text-muted">A detected slick must be verified before any action.</p>
+    </motion.div>
   );
 }

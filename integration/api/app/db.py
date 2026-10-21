@@ -23,7 +23,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(255))
-    role: Mapped[str] = mapped_column(String(20))  # "agency" or "fisher"
+    role: Mapped[str] = mapped_column(String(20))  # agency, researcher, fisheries_officer, conservation, fisher, other
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 

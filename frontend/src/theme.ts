@@ -1,36 +1,45 @@
 /**
- * The app's colours and fonts. tailwind.config.ts uses these, so classes like bg-navy,
- * text-coral-text or border-line come from here. Do not add other colours.
- *
- * Contrast notes (WCAG AA needs 4.5:1 for text):
- * - coral is for accents and borders only; buttons use coral-text with paper text (4.9:1).
- * - amber is not a text colour; medium severity uses ink text with an amber border.
+ * The app's colours and fonts (Ocean AI design). tailwind.config.ts uses these, so classes like
+ * bg-deep, text-tide or border-line come from here. Do not add other colours.
  */
 export const colors = {
-  navy: '#13294B',
-  'navy-deep': '#0F2433',
-  coral: '#D9653B',
-  'coral-text': '#B44D27',
-  amber: '#C47A1C',
-  sea: '#1B5E8C',
-  'reef-green': '#2F7D6B',
-  paper: '#FBF8F2',
-  'paper-2': '#F3EFE6',
-  ink: '#2E3440',
-  muted: '#5B6470',
-  line: '#C8CDD3',
+  /** darkest navy: hero, footer */
+  abyss: '#061a26',
+  /** primary dark: headings, buttons, selected states */
+  deep: '#0b2d40',
+  'deep-2': '#12405a',
+  /** teal: links, icons, accents */
+  tide: '#1d7f7e',
+  /** light teal: accents on dark backgrounds */
+  shallow: '#8cc9c1',
+  /** page background */
+  paper: '#f7f4ee',
+  /** alternate panels */
+  sand: '#ece6da',
+  line: '#dbd3c4',
+  ink: '#12222d',
+  muted: '#56656f',
+  coral: '#d0603f',
+  'coral-soft': '#f0c9b8',
+  /** medium severity / warnings */
+  amber: '#c08a2b',
+  'amber-text': '#9a6b17',
+  'amber-soft': '#fbf5e8',
+  white: '#ffffff',
 };
 
 export const fonts = {
-  /** Headings and UI (buttons, navigation, tables). */
-  sans: ['Carlito', 'Arial', 'sans-serif'],
-  /** Body text (paragraphs). */
-  serif: ['Caladea', 'Georgia', 'serif'],
+  /** headings */
+  display: ['Newsreader', 'Georgia', 'serif'],
+  /** body and UI */
+  body: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+  /** small labels, numbers, coordinates */
+  mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
 };
 
-/** Map colours for severity, used for markers and shapes. */
+/** Map / chart colours for severity. */
 export const severityColor = {
-  low: colors['reef-green'],
+  low: colors.tide,
   medium: colors.amber,
-  high: colors['coral-text'],
+  high: '#c4502f',
 } as const;

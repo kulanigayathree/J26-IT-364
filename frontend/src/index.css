@@ -3,27 +3,23 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-paper font-sans text-ink antialiased;
+  html {
+    scroll-behavior: smooth;
   }
-  h1,
-  h2,
-  h3 {
-    @apply font-sans font-bold text-navy;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-paper font-body text-ink antialiased;
+  }
+  ::selection {
+    background: theme('colors.shallow');
+    color: theme('colors.abyss');
   }
   :focus-visible {
-    outline: 2px solid theme('colors.sea');
+    outline: 2px solid theme('colors.tide');
     outline-offset: 2px;
   }
-}
-
-/* Leaflet: match the app look */
-.leaflet-container {
-  background: theme('colors.paper-2');
-  font-family: theme('fontFamily.sans');
-}
-.leaflet-tooltip {
-  color: theme('colors.ink');
-  border-color: theme('colors.line');
-  font-family: theme('fontFamily.sans');
 }
