@@ -12,6 +12,7 @@ import { StatCard } from '../../components/StatCard';
 import { formatDateTime, percent } from '../../format';
 import { colors, severityColor } from '../../theme';
 import type { Candidate, Spill } from '../../types/c4';
+import { DetectPanel } from './DetectPanel';
 
 export default function C4Page() {
   const state = useApi(getC4Data, []);
@@ -27,7 +28,12 @@ export default function C4Page() {
       emptyMessage="No spill alerts yet. The C4 model has not exported any detections."
       disclaimer="Model output – not field-confirmed. Candidate vessels are candidates, not proof; attribution must be verified by the authorities."
     >
-      {(data) => <SpillView spills={data.spills} summary={data.summary} selectedId={selectedId} onSelect={setSelectedId} />}
+      {(data) => (
+        <>
+          <DetectPanel />
+          <SpillView spills={data.spills} summary={data.summary} selectedId={selectedId} onSelect={setSelectedId} />
+        </>
+      )}
     </ComponentPage>
   );
 }

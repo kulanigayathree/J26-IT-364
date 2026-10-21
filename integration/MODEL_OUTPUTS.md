@@ -1,5 +1,11 @@
 # Model outputs: how each model plugs into the app
 
+There are two ways a model appears on the website:
+
+1. **Latest results** (all components): the model's exported JSON file, described below.
+2. **"Try the model"** (live run on user input): the API runs the trained model directly.
+   Ready for **C4** (upload a SAR image → Detect). See [Live model runs](#live-model-runs-try-the-model) at the end.
+
 The API does **not** run any model code. Each member exports their model's latest predictions from
 their notebook as one JSON file, and the API reads it:
 
@@ -232,3 +238,31 @@ out = {"model_name": "C4 U-Net slick detector + AIS attribution", "model_version
 with open("integration/model_outputs/c4/spills.json", "w", encoding="utf-8") as f:
     json.dump(out, f, indent=2)
 ```
+
+---
+
+## Live model runs ("Try the model")
+
+### C4 – upload a SAR image → Detect
+
+The C4 page has an upload box and a **Detect** button (`POST /api/c4/detect`). The API runs the
+C4 member's own pipeline from `models/C4_oil_spill/` (it is imported, never changed):
+
+1. speckle filter → 2. dark-spot mask → 3. clean-up → 4. patches (`c4_utils.detect`)
+5. 19 features per patch (`c4_features.patch_features`)
+6. **oil vs look-alike** with the trained classifier
+
+Step 6 needs the trained model. Copy it from the C4 member's Drive (`MODEL_DIR` in
+`C4_04_train_models.ipynb` / `C4_04b_tuning.ipynb`) into:
+
+```
+data/external/c4/
+  <model>.joblib       ← the trained classifier (the tuned one if there is one; names with "tuned" or "best" are preferred)
+  <meta>.json          ← optional: {"features": [...], "threshold": 0.xx} saved next to the model
+```
+
+- `data/` is gitignored, so the model file stays on this computer.
+- Without a model file, steps 1–5 still run and every patch is shown as "dark spot".
+- Use the **same scikit-learn version** as in Colab (`import sklearn; sklearn.__version__`), otherwise
+  the model file may not load. If it needs another package (e.g. `imbalanced-learn`), install it with pip.
+- Good demo images: Sentinel-1 VV crops (PNG/JPG/GeoTIFF, up to 4000 px) with and without oil.

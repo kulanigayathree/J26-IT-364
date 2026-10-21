@@ -37,3 +37,39 @@ export interface C4Data extends ModelMeta {
   summary: C4Summary;
   spills: Spill[];
 }
+
+// ---- live detection: POST /api/c4/detect
+
+export interface ClassifierStatus {
+  available: boolean;
+  name: string | null;
+  threshold: number | null;
+  message: string | null;
+}
+
+export interface DetectedPatch {
+  id: number;
+  /** "dark spot" = found but not classified (no model file installed) */
+  verdict: 'oil' | 'look-alike' | 'dark spot';
+  /** probability of oil, null when not classified */
+  probability: number | null;
+  area_px: number;
+  elongation: number;
+  contrast: number;
+  /** [x0, y0, x1, y1] in pixels */
+  bbox: number[];
+  /** [[x, y], ...] in pixels */
+  outline: number[][];
+}
+
+export interface DetectResult {
+  width: number;
+  height: number;
+  classifier: ClassifierStatus;
+  n_patches: number;
+  n_oil: number;
+  patches: DetectedPatch[];
+  /** PNG data URLs of each step */
+  images: { original: string; filtered: string; mask: string };
+  runtime_ms: number;
+}
