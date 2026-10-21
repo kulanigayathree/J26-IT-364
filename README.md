@@ -11,7 +11,7 @@ An integrated marine monitoring system built from four machine learning componen
 | C3 | Reef Health Assessment | Assess and monitor coral reef health |
 | C4 | Oil Spill Detection | Detect and map oil spills |
 
-The results from each component are stored in PostGIS and served through a shared API to the frontend.
+The results from each component are served through a shared API (FastAPI) to the web app. Model outputs are file-based for now (`integration/model_outputs/`); user accounts are stored in SQLite.
 
 ## Project Structure
 
@@ -36,7 +36,7 @@ The results from each component are stored in PostGIS and served through a share
 │
 ├── integration/
 │   ├── api/             # Backend API that serves model results
-│   ├── postgis/         # Database schema and migrations
+│   ├── postgis/         # Reserved for a future PostGIS database (not used yet)
 │   └── output/          # Generated outputs (maps, reports, exports)
 │
 ├── frontend/            # User interface
@@ -52,8 +52,8 @@ The results from each component are stored in PostGIS and served through a share
 
 ### Prerequisites
 
-- Python 3.10 or 3.11
-- Docker and Docker Compose
+- Python 3.10 or newer
+- Node.js 20 or newer (for the web app)
 - Git
 
 ### Setup
@@ -69,9 +69,6 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Start the database and services
-docker-compose up -d
 ```
 
 ## Run the app
