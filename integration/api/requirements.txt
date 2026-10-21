@@ -16,3 +16,6 @@ scikit-learn>=1.3           # use the same version the C4 model was trained with
 opencv-python-headless>=4.8
 scikit-image>=0.22
 scipy>=1.10
+pyyaml>=6.0                 # C1 code imports it
+torch>=2.1                  # C1 model; CPU is enough. Smaller CPU-only install:
+                            #   pip install torch --index-url https://download.pytorch.org/whl/cpu

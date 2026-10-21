@@ -11,6 +11,7 @@ import { StatCard } from '../../components/StatCard';
 import { formatDateTime, formatLatLon } from '../../format';
 import { colors, severityColor } from '../../theme';
 import type { Anomaly } from '../../types/c1';
+import { AnalysePanel } from './AnalysePanel';
 
 const TYPE_LABEL: Record<string, string> = {
   ais_gap: 'AIS gap',
@@ -37,6 +38,8 @@ export default function C1Page() {
     >
       {(data) => (
         <>
+          <AnalysePanel />
+
           <StatRow>
             <StatCard label="Anomalies today" value={data.summary.anomalies_today} note="last 24 h" />
             <StatCard label="High severity" value={data.summary.high_severity} />
