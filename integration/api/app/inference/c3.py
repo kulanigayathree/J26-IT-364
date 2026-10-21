@@ -1,4 +1,12 @@
-"""C3 live classification: runs the trained C3 benthic classifier on a Sentinel-2 composite.
+"""C3 reef health by location: habitat map, benthic cover, agreement and thermal stress per reef site.
+
+For a selected site (HKD = Hikkaduwa, PGI = Pigeon Island …) the result comes from, in order:
+  1. a LIVE model run, if data/external/c3/S2_<SITE>_composite[_v2].tif exists, or
+  2. the C3 member's SAVED results in models/C3_reef_health/results/
+     (benthic_cover.csv, map_<SITE>.png, map_agreement.csv).
+Thermal stress (NOAA Coral Reef Watch DHW) is added when data/external/c3/dhw_<SITE>.csv exists.
+
+The live run uses the trained C3 benthic classifier on a Sentinel-2 composite.
 
 Pre-processing and prediction are copied EXACTLY from the C3 member's demo
 models/C3_reef_health/app.py (read_tif … predict, reef_mask_for). That file is a Streamlit script,
@@ -261,4 +269,144 @@ def classify(*, upload: bytes | None = None, example_id: str | None = None, use_
         "glint": {k: round(v, 4) if isinstance(v, float) else v for k, v in g.items()},
         "images": {"rgb": _png(np, rgb), "classes": _png(np, cls)},
         "runtime_ms": round((time.perf_counter() - t0) * 1000),
+    }
+
+
+# ---------------- reef health by location ----------------
+
+RESULTS_DIR = Path(os.environ.get("C3_RESULTS_DIR", REPO / "models" / "C3_reef_health" / "results"))
+
+# Known C3 study sites (code used in the C3 file names).
+SITES = {
+    "HKD": {"name": "Hikkaduwa National Park", "region": "Galle (south-west coast)", "lat": 6.139, "lon": 80.093},
+    "PGI": {"name": "Pigeon Island National Park", "region": "Trincomalee (east coast)", "lat": 8.722, "lon": 81.204},
+}
+
+# NOAA Coral Reef Watch alert levels from Degree Heating Weeks (°C-weeks).
+DHW_LEVELS = [(8.0, "Alert 2", "Severe heat stress: bleaching and mortality likely", "high"),
+              (4.0, "Alert 1", "Significant heat stress: bleaching likely", "medium"),
+              (0.0, "No alert", "No significant heat stress", "low")]
+
+
+def _composite_for(site: str) -> Path | None:
+    for fn in (f"S2_{site}_composite_v2.tif", f"S2_{site}_composite.tif"):
+        if (DATA_DIR / fn).exists():
+            return DATA_DIR / fn
+    return None
+
+
+def _saved_cover(site: str) -> list[dict] | None:
+    import csv
+
+    path = RESULTS_DIR / "benthic_cover.csv"
+    if not path.exists():
+        return None
+    with path.open(encoding="utf-8") as f:
+        rows = [r for r in csv.DictReader(f) if r.get("site") == site]
+    if not rows:
+        return None
+    code_of = {v: k for k, v in CLASSES.items()}
+    return [{"code": code_of.get(r["class"], 0), "name": r["class"], "pixels": int(float(r["pixels"])),
+             "area_ha": round(float(r["area_ha"]), 2), "percent": round(float(r["cover_pct"]), 1)} for r in rows]
+
+
+def _agreement(site: str) -> float | None:
+    import csv
+
+    path = RESULTS_DIR / "map_agreement.csv"
+    if not path.exists():
+        return None
+    with path.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r.get("site") == site:
+                return round(float(r.get("agreement_smoothed") or r.get("agreement_raw")), 3)
+    return None
+
+
+def _dhw(site: str) -> dict | None:
+    path = DATA_DIR / f"dhw_{site}.csv"
+    if not path.exists():
+        return None
+    _, np, _, _ = _libs()
+    import pandas as pd
+
+    df = pd.read_csv(path, parse_dates=["time"]).dropna(subset=["CRW_DHW"]).sort_values("time")
+    if df.empty:
+        return None
+    s = df.set_index("time")["CRW_DHW"]
+    last_year = s[s.index >= s.index.max() - pd.Timedelta(days=365)]
+    peak = float(last_year.max())
+    level = next(lv for lv in DHW_LEVELS if peak >= lv[0])
+    monthly = s.resample("MS").max().dropna()
+    return {
+        "latest": round(float(s.iloc[-1]), 2), "latest_date": str(s.index[-1].date()),
+        "max_12m": round(peak, 2), "max_12m_date": str(last_year.idxmax().date()),
+        "max_all": round(float(s.max()), 2), "max_all_date": str(s.idxmax().date()),
+        "alert": level[1], "alert_text": level[2], "severity": level[3],
+        "monthly": [{"month": str(t.date())[:7], "dhw": round(float(v), 2)} for t, v in monthly.items()],
+    }
+
+
+def _site_list() -> list[str]:
+    codes = set(SITES)
+    if DATA_DIR.exists():
+        codes |= {m.group(1) for p in DATA_DIR.glob("S2_*_composite*.tif") if (m := re.match(r"S2_([A-Za-z0-9]+)_composite", p.name))}
+        codes |= {p.stem.split("_", 1)[1] for p in DATA_DIR.glob("dhw_*.csv")}
+    return sorted(codes)
+
+
+def sites_status() -> dict:
+    model = None
+    message = None
+    try:
+        model = status()["model"]
+    except C3Unavailable as e:
+        message = str(e)
+    out = []
+    for code in _site_list():
+        info = SITES.get(code, {"name": code, "region": "", "lat": None, "lon": None})
+        out.append({"code": code, **info,
+                    "live": _composite_for(code) is not None,
+                    "saved": _saved_cover(code) is not None,
+                    "thermal": (DATA_DIR / f"dhw_{code}.csv").exists()})
+    return {"available": any(s["live"] or s["saved"] for s in out), "message": message, "model": model, "sites": out}
+
+
+def site_health(site: str) -> dict:
+    site = site.upper()
+    if site not in _site_list():
+        raise ValueError(f"Unknown reef site '{site}'.")
+    info = SITES.get(site, {"name": site, "region": "", "lat": None, "lon": None})
+    composite = _composite_for(site)
+
+    images: dict = {}
+    if composite is not None:  # live model run on the site's composite
+        r = classify(example_id=composite.name, use_mask=True, smooth=True)
+        source, cover = "live", r["cover"]
+        images = {"rgb": r["images"]["rgb"], "classes": r["images"]["classes"], "figure": None}
+        runtime = r["runtime_ms"]
+        note = f"Live run of the C3 model on {composite.name}" + (" inside the reef extent" if r["reef_mask_used"] else "")
+    else:  # the C3 member's saved results
+        cover = _saved_cover(site)
+        if cover is None:
+            raise ValueError(f"No results for {site} yet. Add S2_{site}_composite_v2.tif to data/external/c3/.")
+        fig = RESULTS_DIR / f"map_{site}.png"
+        if fig.exists():
+            images = {"rgb": None, "classes": None,
+                      "figure": "data:image/png;base64," + base64.b64encode(fig.read_bytes()).decode()}
+        source, runtime = "saved", 0
+        note = "Saved results of the C3 model (models/C3_reef_health/results)"
+
+    coral = next((c for c in cover if c["name"] == "Coral/Algae"), None)
+    return {
+        "code": site, **info,
+        "source": source,
+        "source_note": note,
+        "cover": cover,
+        "coral_algae_percent": coral["percent"] if coral else None,
+        "mapped_area_ha": round(sum(c["area_ha"] for c in cover), 1),
+        "agreement": _agreement(site),
+        "thermal": _dhw(site),
+        "images": images,
+        "runtime_ms": runtime,
     }

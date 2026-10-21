@@ -38,7 +38,7 @@ class C3Data(ModelMeta):
     reefs: list[Reef]
 
 
-# ---------------------------------------------------------------- live classification (POST /api/c3/classify)
+# ---------------------------------------------------------------- reef health by location (GET /api/c3/sites)
 
 
 class C3ModelInfo(BaseModel):
@@ -52,18 +52,22 @@ class C3ModelInfo(BaseModel):
     trained_with: dict | None
 
 
-class CompositeExample(BaseModel):
-    id: str  # file name in data/external/c3/
-    site: str
-    version: str
-    has_reef_mask: bool
+class ReefSite(BaseModel):
+    code: str  # e.g. HKD, PGI (as in the C3 file names)
+    name: str
+    region: str
+    lat: float | None
+    lon: float | None
+    live: bool  # a Sentinel-2 composite is available -> the model runs live
+    saved: bool  # saved C3 results exist
+    thermal: bool  # NOAA DHW file exists
 
 
-class ClassifyStatus(BaseModel):
+class SitesStatus(BaseModel):
     available: bool
     message: str | None
     model: C3ModelInfo | None
-    examples: list[CompositeExample]
+    sites: list[ReefSite]
 
 
 class ClassCover(BaseModel):
@@ -74,19 +78,42 @@ class ClassCover(BaseModel):
     percent: float
 
 
-class ClassifyImages(BaseModel):
-    rgb: str  # PNG data URLs
-    classes: str
+class DhwMonth(BaseModel):
+    month: str  # YYYY-MM
+    dhw: float  # monthly maximum
 
 
-class ClassifyResult(BaseModel):
-    image: str
-    width: int
-    height: int
-    classified_pixels: int
-    reef_mask_used: bool
-    smoothed: bool
+class ThermalStress(BaseModel):
+    latest: float
+    latest_date: str
+    max_12m: float
+    max_12m_date: str
+    max_all: float
+    max_all_date: str
+    alert: str  # NOAA Coral Reef Watch: No alert / Alert 1 / Alert 2
+    alert_text: str
+    severity: Literal["low", "medium", "high"]
+    monthly: list[DhwMonth]
+
+
+class HealthImages(BaseModel):
+    rgb: str | None  # live run: true colour PNG
+    classes: str | None  # live run: habitat map PNG
+    figure: str | None  # saved run: C3 figure (image | prediction | reference)
+
+
+class SiteHealth(BaseModel):
+    code: str
+    name: str
+    region: str
+    lat: float | None
+    lon: float | None
+    source: Literal["live", "saved"]
+    source_note: str
     cover: list[ClassCover]
-    glint: dict
-    images: ClassifyImages
+    coral_algae_percent: float | None
+    mapped_area_ha: float
+    agreement: float | None  # agreement with the Allen Coral Atlas reference map
+    thermal: ThermalStress | None
+    images: HealthImages
     runtime_ms: int

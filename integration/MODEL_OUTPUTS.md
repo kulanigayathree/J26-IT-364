@@ -294,15 +294,23 @@ data/external/c2/                       ← from MyDrive/C2_data
   results/best_model.txt                (optional)
 ```
 
-### C3 – map the reef floor from a satellite image → Classify
+### C3 – reef health by location
 
-`POST /api/c3/classify` runs `models/C3_reef_health/best_model.joblib` with the pre-processing
-copied from the C3 demo `models/C3_reef_health/app.py` (sunglint correction, neighbourhood features,
-3×3 majority filter). Users pick a composite or upload a GeoTIFF (B2, B3, B4, B8, B11 × 10000).
+`GET /api/c3/sites` and `GET /api/c3/sites/HKD`: choose a reef (Hikkaduwa, Pigeon Island …) and see its
+habitat map, benthic cover, agreement with the Allen Coral Atlas and heat stress. For each site:
+
+1. **Live model run** if a Sentinel-2 composite is present: `models/C3_reef_health/best_model.joblib`
+   with the pre-processing copied from the C3 demo `models/C3_reef_health/app.py`.
+2. Otherwise the **saved C3 results** in `models/C3_reef_health/results/`
+   (`benthic_cover.csv`, `map_<SITE>.png`, `map_agreement.csv`), which are already in the repo.
+3. **Heat stress** (NOAA Coral Reef Watch Degree Heating Weeks, alert levels 4 and 8) when a DHW file is present.
 
 ```
-data/external/c3/                       ← from MyDrive/coral_c3
-  S2_HKD_composite_v2.tif  S2_PGI_composite_v2.tif     (the model was trained on the v2 composites)
-  ACA_HKD_label_v2.tif     ACA_PGI_label_v2.tif        (optional: limits the map to the reef area)
+data/external/c3/                       ← from MyDrive/coral_c3 (all optional)
+  S2_HKD_composite_v2.tif  S2_PGI_composite_v2.tif     (live model run; trained on v2 composites)
+  ACA_HKD_label_v2.tif     ACA_PGI_label_v2.tif        (limits the live map to the reef area)
+  dhw_HKD.csv              dhw_PGI.csv                 (columns: time, CRW_DHW)
 ```
+New sites appear automatically when their `S2_<SITE>_composite*.tif` or `dhw_<SITE>.csv` is added
+(add the name and coordinates to `SITES` in `integration/api/app/inference/c3.py`).
 If C3 changes `app.py`'s pre-processing, update `integration/api/app/inference/c3.py` to match.

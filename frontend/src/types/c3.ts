@@ -37,7 +37,7 @@ export interface C3Data extends ModelMeta {
   reefs: Reef[];
 }
 
-// ---- live classification: POST /api/c3/classify
+// ---- reef health by location: GET /api/c3/sites, /api/c3/sites/{code}
 
 export interface C3ModelInfo {
   name: string | null;
@@ -50,19 +50,26 @@ export interface C3ModelInfo {
   trained_with: Record<string, string> | null;
 }
 
-export interface CompositeExample {
-  /** file name in data/external/c3/ */
-  id: string;
-  site: string;
-  version: string;
-  has_reef_mask: boolean;
+export interface ReefSite {
+  /** e.g. HKD, PGI */
+  code: string;
+  name: string;
+  region: string;
+  lat: number | null;
+  lon: number | null;
+  /** a Sentinel-2 composite is on the server: the model runs live */
+  live: boolean;
+  /** saved C3 results exist */
+  saved: boolean;
+  /** NOAA heat-stress (DHW) file exists */
+  thermal: boolean;
 }
 
-export interface ClassifyStatus {
+export interface SitesStatus {
   available: boolean;
   message: string | null;
   model: C3ModelInfo | null;
-  examples: CompositeExample[];
+  sites: ReefSite[];
 }
 
 export interface ClassCover {
@@ -73,16 +80,35 @@ export interface ClassCover {
   percent: number;
 }
 
-export interface ClassifyResult {
-  image: string;
-  width: number;
-  height: number;
-  classified_pixels: number;
-  reef_mask_used: boolean;
-  smoothed: boolean;
+export interface ThermalStress {
+  latest: number;
+  latest_date: string;
+  max_12m: number;
+  max_12m_date: string;
+  max_all: number;
+  max_all_date: string;
+  /** NOAA Coral Reef Watch: No alert / Alert 1 / Alert 2 */
+  alert: string;
+  alert_text: string;
+  severity: 'low' | 'medium' | 'high';
+  monthly: { month: string; dhw: number }[];
+}
+
+export interface SiteHealth {
+  code: string;
+  name: string;
+  region: string;
+  lat: number | null;
+  lon: number | null;
+  source: 'live' | 'saved';
+  source_note: string;
   cover: ClassCover[];
-  glint: Record<string, number>;
-  /** PNG data URLs */
-  images: { rgb: string; classes: string };
+  coral_algae_percent: number | null;
+  mapped_area_ha: number;
+  /** agreement with the Allen Coral Atlas reference map, 0–1 */
+  agreement: number | null;
+  thermal: ThermalStress | null;
+  /** PNG data URLs: live run gives rgb + classes, saved results give one figure */
+  images: { rgb: string | null; classes: string | null; figure: string | null };
   runtime_ms: number;
 }
