@@ -9,7 +9,6 @@ optional type_clf.joblib, optional test_tracks.csv for examples) inside data/ext
 (or the folder set by C1_MODEL_DIR).
 """
 
-import io
 import json
 import os
 import sys
@@ -24,18 +23,9 @@ MODEL_ROOT = Path(os.environ.get("C1_MODEL_DIR", REPO / "data" / "external" / "c
 WINDOW = 10  # pings per window (c1_config: windows.size)
 STRIDE = 1  # score every ping position
 DATA_CFG = {"max_gap_hours": 6, "min_track_pings": 20}
-MAX_ROWS = 200_000
 MAX_POINTS = 2000  # points sent back for the map / chart
 
 INJECT_TYPES = {"spoof": "Spoofing", "gap": "Gap (AIS off)", "slowdown": "Slowdown", "zigzag": "Zigzag"}
-COLUMN_ALIASES = {
-    "mmsi": ["mmsi", "vessel_id", "id"],
-    "time": ["time", "timestamp", "basedatetime", "datetime", "date_time"],
-    "lat": ["lat", "latitude"],
-    "lon": ["lon", "lng", "long", "longitude"],
-    "sog": ["sog", "speed"],
-    "cog": ["cog", "course"],
-}
 
 
 class C1Unavailable(RuntimeError):
@@ -153,34 +143,6 @@ def list_examples(limit: int = 8) -> list[dict]:
     with_inj = [r for r in rows if r["injected"]][: limit // 2]
     clean = [r for r in rows if not r["injected"]][: limit - len(with_inj)]
     return with_inj + clean
-
-
-def read_upload(data: bytes):
-    _np, pd, *_ = _modules()
-    try:
-        raw = pd.read_csv(io.BytesIO(data), nrows=MAX_ROWS + 1)
-    except Exception as e:  # noqa: BLE001 - any parse error is the user's file
-        raise ValueError(f"Could not read the CSV file ({e}).") from e
-    if len(raw) > MAX_ROWS:
-        raise ValueError(f"The file has more than {MAX_ROWS:,} rows. Upload one or a few vessels.")
-    lower = {c.lower().strip(): c for c in raw.columns}
-    out = pd.DataFrame()
-    missing = []
-    for std, names in COLUMN_ALIASES.items():
-        col = next((lower[n] for n in names if n in lower), None)
-        if col is None:
-            if std == "mmsi":
-                out["mmsi"] = 1
-                continue
-            missing.append(std)
-        else:
-            out[std] = raw[col]
-    if missing:
-        raise ValueError(
-            "The CSV needs columns for: " + ", ".join(missing)
-            + ". Accepted names: time/timestamp, lat/latitude, lon/longitude, sog/speed, cog/course (mmsi optional)."
-        )
-    return out
 
 
 def example_track(example_id: str):

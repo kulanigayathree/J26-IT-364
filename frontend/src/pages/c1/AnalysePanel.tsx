@@ -1,5 +1,5 @@
-import { useMemo, useState, type ChangeEvent } from 'react';
-import { Activity, FileUp } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Activity } from 'lucide-react';
 import { CircleMarker, Polyline, Tooltip } from 'react-leaflet';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip as ChartTooltip, XAxis, YAxis } from 'recharts';
 import { analyseTrack, getC1AnalyseStatus } from '../../api/c1';
@@ -30,9 +30,7 @@ const pct = (v: number | null | undefined) => (v === null || v === undefined ? '
 /** "Try the model": run the trained C1 model on a vessel track. */
 export function AnalysePanel() {
   const status = useApi(getC1AnalyseStatus, []);
-  const [source, setSource] = useState<'example' | 'file'>('example');
   const [exampleId, setExampleId] = useState('');
-  const [file, setFile] = useState<File | null>(null);
   const [inject, setInject] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,16 +38,15 @@ export function AnalysePanel() {
 
   const examples = status.data?.examples ?? [];
   const chosenExample = exampleId || examples[0]?.id || '';
-  const canRun = source === 'example' ? Boolean(chosenExample) : Boolean(file);
+  const canRun = Boolean(chosenExample);
 
+  // Like C1's DEMO mode: recorded tracks run through the model, with optional injected anomalies (no uploads, no live feed).
   const run = async () => {
     setBusy(true);
     setError(null);
     setResult(null);
     try {
-      setResult(
-        await analyseTrack(source === 'example' ? { exampleId: chosenExample, inject } : { file: file ?? undefined, inject }),
-      );
+      setResult(await analyseTrack({ exampleId: chosenExample, inject }));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Analysis failed.');
     } finally {
@@ -83,44 +80,17 @@ export function AnalysePanel() {
 
       {status.data?.available && (
         <div className="mt-4 flex flex-col gap-4">
-          <div className="grid max-w-md grid-cols-2 overflow-hidden rounded border border-navy">
-            {(['example', 'file'] as const).map((s) => (
-              <button
-                key={s}
-                type="button"
-                aria-pressed={source === s}
-                onClick={() => setSource(s)}
-                className={`h-11 font-bold ${source === s ? 'bg-navy text-paper' : 'bg-paper text-navy hover:bg-paper-2'}`}
-              >
-                {s === 'example' ? 'Example vessel' : 'Upload CSV'}
-              </button>
-            ))}
-          </div>
-
           <div className="grid gap-4 md:grid-cols-2">
-            {source === 'example' ? (
-              <label className="flex flex-col gap-1 text-sm font-bold">
-                Example track (C1 evaluation data)
-                <select value={chosenExample} onChange={(e) => setExampleId(e.target.value)} className={`${inputClass} font-normal`}>
-                  {examples.map((x) => (
-                    <option key={x.id} value={x.id}>
-                      Vessel {x.mmsi} · {x.pings} pings · {x.injected.length ? `has test anomaly: ${x.injected.join(', ')}` : 'no test anomaly'}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : (
-              <label className="flex cursor-pointer items-center gap-3 self-end rounded border border-dashed border-muted bg-paper-2 px-4 py-3 hover:border-navy">
-                <FileUp aria-hidden className="h-6 w-6 shrink-0 text-navy" />
-                <span className="min-w-0 truncate">{file ? file.name : 'Choose an AIS CSV (time, lat, lon, sog, cog)'}</span>
-                <input
-                  type="file"
-                  accept=".csv,text/csv"
-                  className="sr-only"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setFile(e.target.files?.[0] ?? null)}
-                />
-              </label>
-            )}
+            <label className="flex flex-col gap-1 text-sm font-bold">
+              Recorded vessel track (C1 evaluation data)
+              <select value={chosenExample} onChange={(e) => setExampleId(e.target.value)} className={`${inputClass} font-normal`}>
+                {examples.map((x) => (
+                  <option key={x.id} value={x.id}>
+                    Vessel {x.mmsi} · {x.pings} pings · {x.injected.length ? `has test anomaly: ${x.injected.join(', ')}` : 'no test anomaly'}
+                  </option>
+                ))}
+              </select>
+            </label>
             <label className="flex flex-col gap-1 text-sm font-bold">
               Test the model by injecting an anomaly (optional)
               <select value={inject} onChange={(e) => setInject(e.target.value)} className={`${inputClass} font-normal`}>
