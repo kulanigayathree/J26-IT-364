@@ -1,22 +1,22 @@
 # c4_utils.py  –  C4 Oil Spill Detection: image processing helpers
-# (C4_02 notebook eken Drive ekata save wenawa. Passe notebooks walath import karanawa.)
+# (Saved to Drive by the C4_02 notebook and imported by later notebooks.)
 import numpy as np
 import cv2
 from skimage import measure
 from scipy import ndimage as ndi
 
-# ---- Settings (tune karanna puluwan) ----
+# ---- Settings (tunable) ----
 MEDIAN_K   = 5      # speckle filter size (odd number)
-BG_FRAC    = 0.5    # background window = image eke podi paththen 50%
+BG_FRAC    = 0.5    # background window = 50% of the image's shorter side
 DARK_RATIO = 0.75   # pixel < background * DARK_RATIO  ->  dark
-LAND_FACTOR = 1.3   # muhudu level ekata wada 30% wadi bright = godabima (background ekata ganne naha)
-MIN_AREA   = 60     # meetharam pixels walata adu patches ain karanawa
-OPEN_K     = 3      # podi noise thith ain karanna
-CLOSE_K    = 5      # kæli patta ekathu karanna
+LAND_FACTOR = 1.3   # pixels 30% brighter than sea level = land (excluded from background)
+MIN_AREA   = 60     # remove patches smaller than this (pixels)
+OPEN_K     = 3      # remove small noise specks
+CLOSE_K    = 5      # join broken slick fragments
 
 
 def load_gray(path):
-    """① Image eka grayscale (0-255) widiyata kiyawanawa."""
+    """① Read the image as grayscale (0-255)."""
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     if img is None:
         raise FileNotFoundError(path)
@@ -24,26 +24,26 @@ def load_gray(path):
 
 
 def denoise(img, k=None):
-    """② Speckle noise adu karanawa (median filter)."""
+    """② Reduce speckle noise (median filter)."""
     return cv2.medianBlur(img, MEDIAN_K if k is None else k)
 
 
 def dark_mask(filtered, bg_frac=None, ratio=None):
-    """③ Threshold: wate muhudata (local background) wada godak kalu pixels."""
+    """③ Threshold: pixels much darker than the surrounding sea (local background)."""
     bg_frac = BG_FRAC if bg_frac is None else bg_frac
     ratio = DARK_RATIO if ratio is None else ratio
     f = filtered.astype(np.float32)
-    k = max(151, int(min(f.shape) * bg_frac) | 1)   # odd window, loku look-alikes walatath
-    # Godabima (bright) pixels background eken ain karanawa -> werala langa muhuda boruwata "kalu" wenne naha
+    k = max(151, int(min(f.shape) * bg_frac) | 1)   # odd window, large enough for big look-alikes
+    # Exclude bright land pixels from the background, so near-shore sea is not falsely "dark"
     valid = f > 0
     sea_level = np.median(f[valid]) if valid.any() else 1.0
     w = (valid & (f < LAND_FACTOR * sea_level)).astype(np.float32)
     background = cv2.blur(f * w, (k, k)) / np.maximum(cv2.blur(w, (k, k)), 1e-3)
-    return (f < background * ratio) & valid      # valid: image border / no-data ain karanawa
+    return (f < background * ratio) & valid      # valid: excludes image border / no-data
 
 
 def clean_mask(mask, open_k=None, close_k=None, min_area=None):
-    """④ Morphology: podi thith ain karala, kæli patta ekathu karala, hidas pirawanawa."""
+    """④ Morphology: remove small specks, join fragments and fill holes."""
     open_k = OPEN_K if open_k is None else open_k
     close_k = CLOSE_K if close_k is None else close_k
     min_area = MIN_AREA if min_area is None else min_area
@@ -59,13 +59,13 @@ def clean_mask(mask, open_k=None, close_k=None, min_area=None):
 
 
 def find_patches(clean):
-    """⑤ Ekata ella thiyena pixels ekathu karala patches number karanawa."""
+    """⑤ Group connected pixels into numbered patches."""
     labels = measure.label(clean, connectivity=2)
     return labels, measure.regionprops(labels)
 
 
 def detect(path):
-    """①-⑤ okkoma ekama function ekakin."""
+    """Run steps ①-⑤ in one call."""
     img = load_gray(path)
     filt = denoise(img)
     raw = dark_mask(filt)
@@ -76,10 +76,10 @@ def detect(path):
 
 def label_patches(props, boxes, is_oil_image, min_overlap=0.5):
     """
-    Hama patch ekakatama label denawa:
+    Assign a label to every patch:
       - No-oil image         -> 'look-alike'
-      - Oil image, kotuwa athule (patch eken >= min_overlap) -> 'oil'
-      - Oil image, kotuwen pita -> 'ignore' (pæhædili naha, use karanne naha)
+      - Oil image, inside an oil box (>= min_overlap of the patch) -> 'oil'
+      - Oil image, outside the boxes -> 'ignore' (uncertain, not used)
     boxes: [(xmin, ymin, xmax, ymax), ...] pixel coords
     """
     out = []
@@ -97,7 +97,7 @@ def label_patches(props, boxes, is_oil_image, min_overlap=0.5):
 
 
 def boxes_detected(props, labels_list, boxes):
-    """Oil kotu walin keeyak threshold eken hoyagaththa da (detection check)."""
+    """Which oil boxes were found by the threshold step (detection check)."""
     hit = [False] * len(boxes)
     for p, lab in zip(props, labels_list):
         if lab != 'oil':

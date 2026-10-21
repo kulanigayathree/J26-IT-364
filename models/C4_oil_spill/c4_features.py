@@ -1,10 +1,10 @@
 # c4_features.py  –  C4 Oil Spill Detection: patch feature extraction
-# (C4_03 notebook eken Drive ekata save wenawa. Training + frontend notebooks walath import karanawa.)
+# (Saved to Drive by the C4_03 notebook and imported by the training and frontend notebooks.)
 import numpy as np
 import cv2
 import c4_utils as u
 
-RING = 15   # patch eka wate "muhuda" ganna pixels ganana
+RING = 15   # width (pixels) of the surrounding-sea ring
 
 FEATURES = [
     'area', 'perimeter', 'elongation', 'eccentricity', 'solidity', 'extent', 'compactness',
@@ -15,11 +15,11 @@ FEATURES = [
 
 def patch_features(res, is_coast=0):
     """
-    u.detect() result eke hama patch ekakatama features dict ekak denawa.
+    Return a feature dict for every patch in a u.detect() result.
       Shape     : area, perimeter, elongation, eccentricity, solidity, extent, compactness
       Darkness  : mean_int, std_int, min_int
-      Context   : bg_mean, bg_std, contrast, intensity_ratio (patch vs wate muhuda)
-      Edge      : edge_gradient (hidas keeyak sharp da)
+      Context   : bg_mean, bg_std, contrast, intensity_ratio (patch vs surrounding sea)
+      Edge      : edge_gradient (how sharp the boundary is)
       Image     : area_frac, img_mean, img_std, is_coast
     """
     f = res['filtered'].astype(np.float32)
@@ -81,7 +81,7 @@ def patch_features(res, is_coast=0):
 
 
 def image_features(path, boxes=None, is_oil_image=False, is_coast=0):
-    """Image ekak -> patches -> features + labels (training walata)."""
+    """Image -> patches -> features + labels (for training)."""
     res = u.detect(path)
     feats = patch_features(res, is_coast)
     labs = u.label_patches(res['props'], boxes or [], is_oil_image)
