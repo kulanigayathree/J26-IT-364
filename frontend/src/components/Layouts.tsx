@@ -14,7 +14,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
   );
 }
 
-/** Frame for public pages (landing, about). The navbar shows "Go to dashboard" when logged in. */
+/** Frame for public pages (landing). The navbar shows "Go to dashboard" when logged in. */
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">

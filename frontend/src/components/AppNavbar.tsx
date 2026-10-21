@@ -10,7 +10,6 @@ const links = [
   { to: '/c2', label: 'C2' },
   { to: '/c3', label: 'C3' },
   { to: '/c4', label: 'C4' },
-  { to: '/about', label: 'About' },
 ];
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>

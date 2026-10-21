@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from './auth/AuthContext';
 import { AppLayout } from './components/Layouts';
-import About from './pages/About';
 import C1Page from './pages/c1/C1Page';
 import C2Page from './pages/c2/C2Page';
 import C3Page from './pages/c3/C3Page';
@@ -26,7 +25,6 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/about" element={<About />} />
       <Route path="/dashboard" element={<Private><Dashboard /></Private>} />
       <Route path="/c1" element={<Private><C1Page /></Private>} />
       <Route path="/c2" element={<Private><C2Page /></Private>} />

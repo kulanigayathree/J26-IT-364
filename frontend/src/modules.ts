@@ -1,6 +1,6 @@
 import { Droplets, Fish, Shell, Ship, type LucideIcon } from 'lucide-react';
 
-/** The four components. Used by the landing page, dashboard, navbar and About page. */
+/** The four components. Used by the landing page and dashboard. */
 export interface ModuleInfo {
   id: 'c1' | 'c2' | 'c3' | 'c4';
   name: string;
