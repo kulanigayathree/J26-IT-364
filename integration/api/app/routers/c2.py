@@ -4,7 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.adapters import c2 as adapter
 from app.auth import get_current_user
-from app.schemas.c2 import C2Data, C2Forecast, C2Summary, C2Zones
+from app.inference import c2 as live
+from app.schemas.c2 import C2Data, C2Forecast, C2Summary, C2Zones, ReplayResult, ReplayStatus
 
 router = APIRouter(prefix="/api/c2", tags=["C2 Fishing zone"], dependencies=[Depends(get_current_user)])
 
@@ -42,3 +43,23 @@ def zones(
         return adapter.get_zones(lead, p, fuel_l_per_km, fuel_price, max_km)
     except KeyError as e:
         raise HTTPException(404, str(e.args[0]))
+
+
+@router.get("/replay/status", response_model=ReplayStatus)
+def replay_status() -> ReplayStatus:
+    """Which saved C2 test forecasts are available (data/external/c2/), and for which dates."""
+    return live.status()
+
+
+@router.get("/replay", response_model=ReplayResult)
+def replay(
+    date: str = Query(..., description="Day 1 of the forecast, e.g. 2025-06-14 (2025 test period)"),
+    model: str = Query("ensemble", description="ensemble, convlstm, convgru or unet"),
+) -> ReplayResult:
+    """The C2 model's saved 3-day forecast for this date, next to the actual fishing that happened."""
+    try:
+        return live.replay(date, model)
+    except live.C2Unavailable as e:
+        raise HTTPException(503, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))

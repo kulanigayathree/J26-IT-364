@@ -36,3 +36,53 @@ export interface C3Data extends ModelMeta {
   summary: C3Summary;
   reefs: Reef[];
 }
+
+// ---- live classification: POST /api/c3/classify
+
+export interface C3ModelInfo {
+  name: string | null;
+  experiment: string | null;
+  features: string[];
+  classes: string[];
+  composite_version: string | null;
+  cv_macro_f1: number | null;
+  cv_accuracy: number | null;
+  trained_with: Record<string, string> | null;
+}
+
+export interface CompositeExample {
+  /** file name in data/external/c3/ */
+  id: string;
+  site: string;
+  version: string;
+  has_reef_mask: boolean;
+}
+
+export interface ClassifyStatus {
+  available: boolean;
+  message: string | null;
+  model: C3ModelInfo | null;
+  examples: CompositeExample[];
+}
+
+export interface ClassCover {
+  code: number;
+  name: string;
+  pixels: number;
+  area_ha: number;
+  percent: number;
+}
+
+export interface ClassifyResult {
+  image: string;
+  width: number;
+  height: number;
+  classified_pixels: number;
+  reef_mask_used: boolean;
+  smoothed: boolean;
+  cover: ClassCover[];
+  glint: Record<string, number>;
+  /** PNG data URLs */
+  images: { rgb: string; classes: string };
+  runtime_ms: number;
+}

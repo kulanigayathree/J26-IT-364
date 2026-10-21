@@ -55,3 +55,51 @@ export interface C2Zones extends ModelMeta {
   fuel_price: number;
   zones: Zone[];
 }
+
+// ---- test-forecast replay: GET /api/c2/replay
+
+export interface ReplayModel {
+  key: string;
+  label: string;
+  has_uncertainty: boolean;
+  uncertainty_note: string | null;
+}
+
+export interface ReplayStatus {
+  available: boolean;
+  message: string | null;
+  models: ReplayModel[];
+  first_date: string | null;
+  last_date: string | null;
+  best_model: string | null;
+}
+
+export interface DayMetrics {
+  fishing_cells: number;
+  sea_cells: number;
+  roc_auc: number | null;
+  pr_auc: number | null;
+  /** share of actual fishing cells inside the 10% highest-probability cells */
+  top10_capture: number | null;
+}
+
+export interface ReplayLead {
+  lead: number;
+  date: string;
+  probability: (number | null)[][];
+  uncertainty: (number | null)[][] | null;
+  /** 1 = fishing happened, 0 = no fishing, null = land */
+  actual: (number | null)[][];
+  metrics: DayMetrics;
+}
+
+export interface ReplayResult {
+  model: string;
+  model_label: string;
+  issued_after: string;
+  lat: number[];
+  lon: number[];
+  cell_size: number;
+  leads: ReplayLead[];
+  runtime_ms: number;
+}

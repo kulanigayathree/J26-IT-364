@@ -3,8 +3,8 @@
 There are two ways a model appears on the website:
 
 1. **Latest results** (all components): the model's exported JSON file, described below.
-2. **"Try the model"** (live run on user input): the API runs the trained model directly.
-   Ready for **C4** (upload a SAR image → Detect). See [Live model runs](#live-model-runs-try-the-model) at the end.
+2. **"Try the model"** (on each component page): the API runs or replays the trained model on user input.
+   See [Live model runs](#live-model-runs-try-the-model) at the end for the files each one needs.
 
 The API does **not** run any model code. Each member exports their model's latest predictions from
 their notebook as one JSON file, and the API reads it:
@@ -266,3 +266,43 @@ data/external/c4/
 - Use the **same scikit-learn version** as in Colab (`import sklearn; sklearn.__version__`), otherwise
   the model file may not load. If it needs another package (e.g. `imbalanced-learn`), install it with pip.
 - Good demo images: Sentinel-1 VV crops (PNG/JPG/GeoTIFF, up to 4000 px) with and without oil.
+
+### C1 – check a vessel track → Analyse
+
+`POST /api/c1/analyse` runs the trained C1 engine with the C1 member's own code from
+`models/C1_vessel_anomaly/` (`features.py`, `model.py`, `type_features.py`, `inject.py`):
+clean → features → 10-ping windows → time-decay GRU autoencoder + AIS-gap rule → threshold → type.
+Users pick an example track or upload a CSV (`time, lat, lon, sog, cog`, optional `mmsi`) and can
+inject a test anomaly (spoofing, gap, slowdown, zigzag) to show the model catching it.
+
+```
+data/external/c1/results_colab_v2/      ← a results folder from run_c1.py (+ train_type_classifier.py)
+  model.pt  scaler.json  score_scale.json  run_info.json      (required)
+  type_clf.joblib  metrics.json  test_tracks.csv              (optional: types, test scores, examples)
+```
+
+### C2 – compare a forecast with what really happened
+
+`GET /api/c2/replay?date=2025-06-14&model=ensemble` shows the C2 model's **saved 2025 test
+forecast** (calibrated, MC dropout) for that day, its uncertainty, and the real fishing that day,
+with ROC-AUC / PR-AUC / top-10% capture per lead day. Nothing is re-run; these are the notebook's numbers.
+
+```
+data/external/c2/                       ← from MyDrive/C2_data
+  datacube_0p25.nc                      (dates, land mask, actual fishing)
+  results/convlstm_test_predictions.npz  convgru_…  unet_…  ensemble_test_predictions.npz
+  results/best_model.txt                (optional)
+```
+
+### C3 – map the reef floor from a satellite image → Classify
+
+`POST /api/c3/classify` runs `models/C3_reef_health/best_model.joblib` with the pre-processing
+copied from the C3 demo `models/C3_reef_health/app.py` (sunglint correction, neighbourhood features,
+3×3 majority filter). Users pick a composite or upload a GeoTIFF (B2, B3, B4, B8, B11 × 10000).
+
+```
+data/external/c3/                       ← from MyDrive/coral_c3
+  S2_HKD_composite_v2.tif  S2_PGI_composite_v2.tif     (the model was trained on the v2 composites)
+  ACA_HKD_label_v2.tif     ACA_PGI_label_v2.tif        (optional: limits the map to the reef area)
+```
+If C3 changes `app.py`'s pre-processing, update `integration/api/app/inference/c3.py` to match.

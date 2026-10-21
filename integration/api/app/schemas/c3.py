@@ -36,3 +36,57 @@ class C3Data(ModelMeta):
     classes: list[str]
     summary: C3Summary
     reefs: list[Reef]
+
+
+# ---------------------------------------------------------------- live classification (POST /api/c3/classify)
+
+
+class C3ModelInfo(BaseModel):
+    name: str | None
+    experiment: str | None
+    features: list[str]
+    classes: list[str]
+    composite_version: str | None
+    cv_macro_f1: float | None
+    cv_accuracy: float | None
+    trained_with: dict | None
+
+
+class CompositeExample(BaseModel):
+    id: str  # file name in data/external/c3/
+    site: str
+    version: str
+    has_reef_mask: bool
+
+
+class ClassifyStatus(BaseModel):
+    available: bool
+    message: str | None
+    model: C3ModelInfo | None
+    examples: list[CompositeExample]
+
+
+class ClassCover(BaseModel):
+    code: int
+    name: str
+    pixels: int
+    area_ha: float
+    percent: float
+
+
+class ClassifyImages(BaseModel):
+    rgb: str  # PNG data URLs
+    classes: str
+
+
+class ClassifyResult(BaseModel):
+    image: str
+    width: int
+    height: int
+    classified_pixels: int
+    reef_mask_used: bool
+    smoothed: bool
+    cover: list[ClassCover]
+    glint: dict
+    images: ClassifyImages
+    runtime_ms: int

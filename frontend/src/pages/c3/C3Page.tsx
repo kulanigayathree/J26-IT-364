@@ -12,6 +12,7 @@ import { StatCard } from '../../components/StatCard';
 import { formatMonth } from '../../format';
 import { colors, fonts } from '../../theme';
 import type { Reef, ReefStatus } from '../../types/c3';
+import { ClassifyPanel } from './ClassifyPanel';
 
 const STATUS: Record<ReefStatus, { label: string; tone: 'good' | 'warn' | 'bad'; color: string }> = {
   good: { label: 'Good', tone: 'good', color: colors['reef-green'] },
@@ -70,6 +71,8 @@ export default function C3Page() {
         const selected = data.reefs.find((r) => r.id === selectedId) ?? data.reefs.find((r) => r.status === 'at_risk') ?? data.reefs[0];
         return (
           <>
+            <ClassifyPanel />
+
             <StatRow>
               <StatCard label="Reefs monitored" value={data.summary.reefs_total} />
               <StatCard label="At risk" value={data.summary.at_risk} />
